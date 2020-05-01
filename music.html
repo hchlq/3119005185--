@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HC player</title>
+    <link rel="stylesheet" href="./css/music.css">
+    <link rel="icon" href="./favicon.ico">
+</head>
+
+<body>
+    <!-- 播放器 -->
+    <div class="device">
+        <div class="main">
+            <ul class="left-songs">
+            </ul>
+            <div class="right-songs">
+                <div class="album">
+                    <img src="" class='p-img' alt="">
+                </div>
+                <div class="wrapper-lyrics">
+                    <div class="lyrics">
+                    </div>
+                </div>
+                <!-- 侧栏 -->
+                <div class="cube-player a-left">
+                    <div class="cube-container cube-one">
+                        <div class="singer1 singer"></div>
+                        <div class="singer2 singer"></div>
+                        <div class="singer3 singer"></div>
+                        <div class="singer4 singer"></div>
+                        <div class="singer5 singer"></div>
+                        <div class="singer6 singer"></div>
+                    </div>
+                </div>
+                <div class="cube-player a-right">
+                    <div class="cube-container cube-two">
+                        <div class="singer1 singer"></div>
+                        <div class="singer2 singer"></div>
+                        <div class="singer3 singer"></div>
+                        <div class="singer4 singer"></div>
+                        <div class="singer5 singer"></div>
+                        <div class="singer6 singer"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="blur-bg"></span>
+        </div>
+        <div class="d-bottom">
+            <!-- 播放 暂停等 -->
+            <div class="player">
+                <div class="prev cm-bg" title='上一首'> 
+                    <i></i>
+                </div>
+                <div class="run-pause cm-bg" title='播放'>
+                    <i></i>
+                </div>
+                <div class="cm-bg next" title='下一首'>
+                    <i></i>
+                </div>
+            </div>
+            <!-- 音乐进度条 -->
+            <div class="prograss">
+                <div class="song-desc">
+                    <span class='author'></span> -
+                    <span class='song-name'></span>
+                </div>
+                <div class="time">
+                    <span class='current'>00:00</span> / <span class='total'>00:00</span>
+                </div>
+                <span class="head-move"></span>
+                <div class="prograss-move"></div>
+            </div>
+            <!-- 其他控件 -->
+            <div class="controls">
+                <div class="play-mode">
+                    <i class='mode'></i>
+                </div>
+                <div class="volume-ico">
+                    <i class='volume-mode'></i>
+                </div>
+                <div class="prograss volume">
+                    <span class="head-move volume-move"></span>
+                    <div class="prograss-move volume-prograss"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio class='audio'></audio>
+    <script src="./js/jQuery.js"></script>
+    <script src='./js/music.js'></script>
+    </script>
+</body>
+
+</html>

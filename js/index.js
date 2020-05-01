@@ -1,109 +1,231 @@
 /**
+ * 简单封装获取dom元素的方法
+ * @param {*} selector id class 标签名
+ * @param {*} isAll 是否获取全部
+ */
+
+function o$(selector, isAll) {
+    selector = selector.replace(/^\s+|\s+$/g, "");
+    if (/^#[a-zA-Z]+[\D\d]*$/.test(selector)) {
+        if (isAll) {
+            return document.querySelectorAll(selector);
+        } else {
+            return document.getElementById(selector);
+        }
+    } else if (/^\.[a-zA-Z]+[\D\d]*$/.test(selector)) {
+        if (isAll) {
+            return document.querySelectorAll(selector);
+        } else {
+            return document.querySelector(selector);
+        }
+    } else if (/^[a-zA-Z]+$/.test(selector)) {
+        if (isAll) {
+            return document.getElementsByTagName(selector);
+        } else {
+            return document.getElementsByTagName(selector)[0];
+        }
+    } else {
+        return;
+    }
+}
+
+
+/**
+ * 封装的ajax函数
+ *@param {*} method  方式Get POST...
+ *@param {*} url 请求的地址
+ *@param {*} callback 成功后调用这个函数，并且把请求回来的数据传给这个回调函数
+ *@param {*} flag 是否异步
+ *@param {*} data 请求的参数
+ */
+
+function ajaxFunc(method, url, callback, flag, data) {
+    var xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject("Microsoft.XMLHttp");
+    }
+    method = method.toUpperCase();
+    if (method == "GET") {
+        xhr.open(method, url + "?" + data, flag);
+        xhr.send();
+    } else {
+        xhr.open(method, url, flag);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(data);
+    }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                callback(xhr.responseText);
+            }
+        }
+    };
+}
+
+/**
+ * 函数防抖, 防止搜索太频繁操作
+ * @param {*} fn 
+ * @param {*} time 
+ */
+
+function debounce(fn, time) {
+    let timer = null
+    return function () {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        let args = arguments;
+        timer = setTimeout(function () {
+            str = '';
+            fn(...args);
+        }, time);
+    }
+}
+
+/**
  * 轮播图
  */
-var banner = (function () {
+let banner = (function () {
     return function () {
-        var imgs = document.querySelectorAll('.banner img');
-        var leftArrow = document.querySelector('.left-arrow');
-        var rightArrow = document.querySelector('.right-arrow');
-        var spans = document.querySelectorAll('.dots span');
-        var dots = document.querySelector('.dots');
-        var mainBanner = document.querySelector('.main-banner');
-        var oIndex = 0;
-
-        function animation() {
-            oIndex = oIndex % 9;
-            if (oIndex < 0) {
-                oIndex = 9;
+        let index = 0;
+        let timer = null;
+        let liNames = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7', 'item8', 'item9'];
+        let banner,
+            spans,
+            lis;
+        ajaxFunc('post', 'http://musicapi.leanapp.cn/banner', bannerCallback, true);
+        /**
+         * 动态获取轮播图
+         */
+        function bannerCallback(data) {
+            data = JSON.parse(data).banners;
+            let str = "";
+            for (let i = 0; i < data.length; i++) {
+                str += `<li class='item${i + 1}'><a href="file:///D:/二轮考核/C.A.T/music.html?id=${data[i].url.split('=')[1]}" target='_blank'><img src="${data[i].picUrl}" alt=""></a></li>`
             }
-            _arguments = arguments
-            var animate = new Animate({
-                duration: 30,
-                total: 3000,
-                begin: {
-                    opacity: 0,
-                    r: getRandomNum(0, 255),
-                    g: getRandomNum(0, 255),
-                    b: getRandomNum(0, 255)
-                },
-                end: {
-                    opacity: 1,
-                    r: getRandomNum(0, 255),
-                    g: getRandomNum(0, 255),
-                    b: getRandomNum(0, 255),
-                },
-                onchange() {
-                    rightArrow.onclick = () => {
-                        this.stop()
-                        initElement()
-                        oIndex++;
-                        animation(..._arguments);
-                        changeDotState(oIndex)
-                    }
-                    leftArrow.onclick = () => {
-                        this.stop();
-                        initElement();
-                        oIndex--;
-                        animation(..._arguments);
-                        changeDotState(oIndex)
-                    }
+            o$('.wrapper-img').innerHTML = str;
+            imgs = o$('.b-imgs');
+            spans = Array.from(o$('.dots span', true));
+            lis = o$('.wrapper-img li', true);
 
-                    dots.onclick = (e) => {
-                        if (e.target.tagName === 'SPAN') {
-                            var index = Array.from(dots.children).indexOf(e.target);
-                            if (index === oIndex) {
-                                return;
-                            }
-                            this.stop();
-                            initElement();
-                            oIndex = index;
-                            animation(..._arguments);
-                            changeDotState(oIndex)
+            function setBg() {
+                url = o$('.item2 img').src;
+                o$('.wrap-banner').style.backgroundImage = `url('${url}')`
+            }
+            setBg()
+            /**
+             * 设置小圆点的状态
+             */
+            function setDotState(index) {
+                let len = spans.length;
+                for (let i = 0; i < len; i++) {
+                    if (i === index) {
+                        spans[i].classList.add('active');
+                    } else {
+                        spans[i].classList.remove('active');
+                    }
+                }
+            }
+            /**
+             * 点击下一张
+             */
+            function next() {
+                //将最后一个名字放到第一个
+                liNames.unshift(liNames[liNames.length - 1]);
+                //删掉最后一个名字
+                liNames.pop();
+                for (let i = 0; i < lis.length; i++) {
+                    lis[i].className = liNames[i];
+                }
+                //设置背景
+                setBg();
+                index++;
+                if (index === 9) {
+                    index = 0;
+                }
+                setDotState(index);
+            }
+
+            /**
+             * 点击上一张
+             */
+            function prev() {
+                //将第一名字放到最后一张
+                liNames.push(liNames[0]);
+                //将第一名字去掉
+                liNames.shift();
+                for (let i = 0; i < liNames.length; i++) {
+                    lis[i].className = liNames[i];
+                }
+                //设置背景
+                setBg()
+                index--;
+                if (index < 0) {
+                    index = lis.length - 1;
+                }
+                setDotState(index)
+            }
+
+            o$('.right-arrow').onclick = function () {
+                stop();
+                next()
+            }
+
+            o$('.left-arrow').onclick = function () {
+                stop();
+                prev()
+            }
+
+            timer = setInterval(function () {
+                next()
+            }, 3000)
+
+            imgs.onmouseenter = function () {
+                stop();
+            }
+
+            imgs.onmouseleave = function () {
+                timer = setInterval(function () {
+                    next()
+                }, 3000)
+            }
+
+            function stop() {
+                clearInterval(timer)
+            }
+
+            spans.forEach(function (ele) {
+                ele.onmouseenter = function () {
+                    stop();
+                    let curIndex = spans.indexOf(this);
+                    let dis = curIndex - index;
+                    if (dis === 0) { //索引值等于当前，不变
+                        return;
+                    } else if (dis > 0) { //向左翻
+                        for (let i = 0; i < dis; i++) {
+                            liNames.unshift(liNames[liNames.length - 1]);
+                            liNames.pop();
                         }
+                    } else if (dis < 0) { //向右翻
+                        liNames.push(liNames[0]);
+                        liNames.shift();
                     }
-                    mainBanner.style.background = `rgba(${this.currentState.r}, ${this.currentState.g}, ${this.currentState.b})`
-                    _arguments[oIndex].style.opacity = 1;
-                },
-                onover() {
-                    initElement()
-                    oIndex++;
-                    animation(..._arguments)
-                    changeDotState(oIndex);
-                    _arguments[oIndex].style.opacity = 0;
-
+                    for (let i = 0; i < liNames.length; i++) {
+                        lis[i].className = liNames[i];
+                    }
+                    setBg();
+                    index = curIndex;
+                    setDotState(index)
+                }
+                ele.onmouseleave = function () {//鼠标移出后重新打开定时器
+                    timer = setInterval(function () {
+                        next()
+                    }, 3000)
                 }
             })
-            animate.start()
         }
-
-
-        function getRandomNum(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min)
-        }
-
-        function initial(dom) {
-            dom.style.opacity = '0';
-        }
-
-        function initElement() {
-            for (var i = 0; i < imgs.length; i++) {
-                initial(imgs[i]);
-            }
-        }
-
-        function changeDotState(index) {
-            for (var i = 0; i < spans.length; i++) {
-                spans[i].className = '';
-                spans[index].className = 'active';
-            }
-        }
-
-
-        function init() {
-            initElement()
-            animation(...imgs)
-        }
-        init();
     }
 }())
 
@@ -111,17 +233,17 @@ var banner = (function () {
  * 精彩推荐轮播
  */
 
-var hotRecommend = (function () {
+let hotRecommend = (function () {
     return function () {
         //配置对象
         var config = {
             imgWidth: 1070, //图片的宽度
             dotWidth: 12, //圆点的宽度
             doms: {
-                divBanner: document.querySelector('.r-banner'),
-                divImgs: document.getElementsByClassName('imgs')[0],
-                divDots: document.querySelector('.r-banner .r-dots'),
-                divArrow: document.getElementsByClassName('r-arrow')[0],
+                divBanner: o$('.r-banner'),
+                divImgs: o$('.imgs'),
+                divDots: o$('.r-banner .r-dots'),
+                divArrow: o$('.r-arrow'),
             },
             currentIndex: 0, //实际的图片索引   0~ imgNumbers - 1
             timer: { // 计时器配置
@@ -276,9 +398,9 @@ var hotRecommend = (function () {
 
         //注册事件 左右
         config.doms.divArrow.onclick = function (e) {
-            if (e.target.className == 'left') {
+            if (e.target.className == 'arrow-left') {
                 toLeft();
-            } else if (e.target.classList.contains('right')) {
+            } else if (e.target.classList.contains('arrow-right')) {
                 toRight();
             }
         }
@@ -352,12 +474,12 @@ var hotRecommend = (function () {
  * 排行榜
  */
 
-var rank = (function () {
+let rank = (function () {
     return function () {
-        var imgShow = document.querySelector('.rank-wrapper')
-        var imgItems = Array.from(document.querySelectorAll('.item'));
-        var closes = Array.from(document.querySelectorAll('.close'));
-        var btns = Array.from(document.querySelectorAll('.inner .btn'));
+        var imgShow = o$('.rank-wrapper')
+        var imgItems = Array.from(o$('.item', true));
+        var closes = Array.from(o$('.close', true));
+        var btns = Array.from(o$('.inner .btn', true));
 
 
 
@@ -375,7 +497,7 @@ var rank = (function () {
         closes.forEach((ele) => {
             ele.onclick = (e) => {
                 e.stopPropagation();
-                Array.from(document.querySelectorAll('.item')).forEach((ele) => {
+                Array.from(o$('.item', true)).forEach((ele) => {
                     ele.classList.remove('active')
                 })
                 imgShow.classList.remove('w-active');
@@ -388,10 +510,10 @@ var rank = (function () {
  * 歌手介绍
  */
 
-var showSinger = (function () {
+let showSinger = (function () {
     return function () {
-        var divBoxs = document.querySelectorAll('.box');
-        var divBgs = document.querySelectorAll('.box-bg');
+        var divBoxs = o$('.box', true);
+        var divBgs = o$('.box-bg', true);
         divBoxs.forEach(function (box) {
             box.addEventListener('mouseenter', function (e) {
                 addClass(e, box, 'in');
@@ -448,200 +570,992 @@ var showSinger = (function () {
 }())
 
 /**
- * MV
+ * 推荐音乐
  */
 
-var mvRotate = (function () {
+let mvRotate = (function () {
     return function () {
-        var lis = Array.from(document.querySelectorAll('.mv-item'));
-        lis.forEach((ele, index) => {
-            ele.addEventListener('mouseenter', function (e) {
-                addClass(e, ele, 'i')
-            })
-
-            ele.addEventListener('mouseleave', function (e) {
-                addClass(e, ele, 'o')
-            })
-        })
-
-        function addClass(e, ele, state) {
-            //判断鼠标进入的方向后添加类名 
-            var x = e.offsetX - ele.offsetWidth / 2;
-            var y = e.offsetY - ele.offsetHeight / 2;
-            // 求角度 0上 1 右 2下 3左
-            var angle = (Math.round((Math.atan2(y, x) * (180 / Math.PI) + 180) / 90) + 3) % 4;
-            var direction;
-            switch (angle) {
-                case 0:
-                    direction = 'top';
-                    break;
-                case 1:
-                    direction = 'right';
-                    break;
-                case 2:
-                    direction = 'bottom';
-                    break;
-                case 3:
-                    direction = 'left'
-                    break;
+        function getSortSong(idx) {
+            let str = '';
+            let times = 0;
+            if (arguments.length > 0) {
+                ajaxFunc('post', `http://musicapi.leanapp.cn/top/list?idx=${idx}`, getSongs, true);
+            } else {
+                ajaxFunc('post', 'http://musicapi.leanapp.cn/personalized/newsong', getLasestSongs, true);
             }
-            ele.className = state + '-' + direction;
-            console.log(state + '-' + direction)
+            //默认是新歌
+            function getLasestSongs(data) {
+
+                data = JSON.parse(data).result;
+                for (let i = 0; i < data.length; i++) {
+                    times++;
+                    let id = data[i].id;
+                    let songName = data[i].name;
+                    let author = data[i].song.album.artists[0].name;
+                    let picUrl = data[i].picUrl;
+                    str += `
+                    <li class='mv-item'>
+                    <div class="picbox">
+                        <div class="show"><img src="${picUrl}" alt=""></div>
+                        <div class="hide">
+                            <p>
+                                <a href="#">${songName}</a>
+                            </p>
+                            <p><a href="#">${author}</a></p>
+                            <a href='file:///D:/二轮考核/C.A.T/music.html?id=${id}' class='play' target='_blank'></a>
+                        </div>
+                    </div>
+                </li>
+                    `
+                    if (times === data.length) {
+                        o$('.lastest-items').innerHTML = str
+                        var lis = Array.from(o$('.mv-item', true));
+                        lis.forEach((ele, index) => {
+                            ele.addEventListener('mouseenter', function (e) {
+                                addClass(e, ele, 'i')
+                            })
+
+                            ele.addEventListener('mouseleave', function (e) {
+                                addClass(e, ele, 'o')
+                            })
+                        })
+                        o$('.lastest-recommend .m-title').style.display = 'block';
+                        o$('.lastest-recommend .sort-nav').style.display = 'block';
+
+                        function addClass(e, ele, state) {
+                            //判断鼠标进入的方向后添加类名 
+                            var x = e.offsetX - ele.offsetWidth / 2;
+                            var y = e.offsetY - ele.offsetHeight / 2;
+                            // 求角度 0上 1 右 2下 3左
+                            var angle = (Math.round((Math.atan2(y, x) * (180 / Math.PI) + 180) / 90) + 3) % 4;
+                            var direction;
+                            switch (angle) {
+                                case 0:
+                                    direction = 'top';
+                                    break;
+                                case 1:
+                                    direction = 'right';
+                                    break;
+                                case 2:
+                                    direction = 'bottom';
+                                    break;
+                                case 3:
+                                    direction = 'left'
+                                    break;
+                            }
+                            ele.className = state + '-' + direction;
+                        }
+                        times = 0;
+                        str = '';
+                    }
+                }
+            }
+            //其他类的
+            function getSongs(data) {
+                data = JSON.parse(data).playlist.tracks
+                for (let i = 0; i < data.length; i++) {
+                    times++;
+                    let id = data[i].id;
+                    let songName = data[i].al.name;
+                    let picUrl = data[i].al.picUrl;
+                    let author = data[i].ar[0].name;
+                    str += `
+                    <li class='mv-item'>
+                    <div class="picbox">
+                        <div class="show"><img src="${picUrl}" alt=""></div>
+                        <div class="hide">
+                            <p>
+                                <a href="#">${songName}</a>
+                            </p>
+                            <p><a href="#">${author}</a></p>
+                            <a href='file:///D:/二轮考核/C.A.T/music.html?id=${id}' class='play' target='_blank'></a>
+                        </div>
+                    </div>
+                </li>
+                    `
+                    if (times === 10) {
+                        o$('.lastest-items').innerHTML = str
+                        var lis = Array.from(o$('.mv-item', true));
+                        lis.forEach((ele, index) => {
+                            ele.addEventListener('mouseenter', function (e) {
+                                addClass(e, ele, 'i')
+                            })
+
+                            ele.addEventListener('mouseleave', function (e) {
+                                addClass(e, ele, 'o')
+                            })
+                        })
+                        o$('.lastest-recommend .m-title').style.display = 'block';
+                        o$('.lastest-recommend .sort-nav').style.display = 'block';
+
+                        function addClass(e, ele, state) {
+                            //判断鼠标进入的方向后添加类名 
+                            var x = e.offsetX - ele.offsetWidth / 2;
+                            var y = e.offsetY - ele.offsetHeight / 2;
+                            // 求角度 0上 1 右 2下 3左
+                            var angle = (Math.round((Math.atan2(y, x) * (180 / Math.PI) + 180) / 90) + 3) % 4;
+                            var direction;
+                            switch (angle) {
+                                case 0:
+                                    direction = 'top';
+                                    break;
+                                case 1:
+                                    direction = 'right';
+                                    break;
+                                case 2:
+                                    direction = 'bottom';
+                                    break;
+                                case 3:
+                                    direction = 'left'
+                                    break;
+                            }
+                            ele.className = state + '-' + direction;
+                        }
+                        times = 0;
+                        str = '';
+                    }
+                }
+            }
         }
+        o$('.nav-items').onclick = function (e) {
+            if (e.target.tagName === 'SPAN') {
+                o$('.wd-active').classList.remove('wd-active')
+                e.target.classList.add('wd-active')
+                if (e.target.classList.contains('gt')) { //港台
+                    getSortSong(14)
+                } else if (e.target.classList.contains('hy')) { //华语
+                    getSortSong(17)
+                } else if (e.target.classList.contains('hg')) { //韩国
+                    getSortSong(11)
+                } else if (e.target.classList.contains('rb')) { //日本
+                    getSortSong(10)
+                } else if (e.target.classList.contains('qt')) { //其他
+                    getSortSong(3);
+                } else if (e.target.classList.contains('nd')) { //内地
+                    getSortSong();
+                }
+            }
+        }
+        getSortSong();
     }
 }())
 
 /**
- * 侧栏播放器
+ * 搜索栏
  */
 
-var asidePlayer = (function () {
-    /**
-     * 简单封装获取dom元素的方法
-     * @param {*} selector id class 标签名
-     * @param {*} isAll 是否获取全部
-     */
-
-    function $(selector, isAll) {
-        selector = selector.replace(/^\s+|\s+$/g, "");
-        if (/^#[a-zA-Z]+([-_][\w]+)*$/.test(selector)) {
-            if (isAll) {
-                return document.querySelectorAll(selector);
-            } else {
-                return document.getElementById(selector);
-            }
-        } else if (/^\.[a-zA-Z]+([-_][\w]+)*$/.test(selector)) {
-            if (isAll) {
-                return document.querySelectorAll(selector);
-            } else {
-                return document.querySelector(selector);
-            }
-        } else if (/^[a-zA-Z]+$/.test(selector)) {
-            if (isAll) {
-                return document.getElementsByTagName(selector);
-            } else {
-                return document.getElementsByTagName(selector)[0];
-            }
-        } else {
-            return;
-        }
-    }
-
-    function player(options) {
-        var defaultConfig = {
-            playState: false,
-            musicArr: [],
-            oIndex: 0,
-            // prograssWidth: $('.prograss').offsetWidth,
-            // curDom: $('.current'),
-            musicPics: [],
-            oAudio: $('.audio')
-        }
-        let musicConfig = Object.assign({}, defaultConfig, options);
-        console.log(musicConfig)
-        $('.audio').src = musicConfig.musicArr[0];
-        /**
-         * 点击播放暂停
-         */
-        $('.start').onclick = function () {
-            console.log(this, 11)
-            if (!musicConfig.playState) {
-                $('.cube-container').style.animationPlayState = 'running'
-                play();
-            } else {
-                play('pause');
-                $('.cube-container').style.animationPlayState = 'paused'
-            }
-        }
-
-        /**
-         * 点击播放上一首
-         */
-        $('.prev').onclick = function () {
-            $('.cube-container').style.animationPlayState = 'running'
-            musicConfig.oIndex--;
-            if (musicConfig.oIndex < 0) {
-                musicConfig.oIndex = 2;
-            }
-            changeMusic(musicConfig.oIndex);
-            play();
-        }
-
-
-        /**
-         * 点击播放下一首
-         */
-        $('.next').onclick = function () {
-            $('.cube-container').style.animationPlayState = 'running'
-            musicConfig.oIndex++;
-            musicConfig.oIndex = musicConfig.oIndex % musicConfig.musicArr.length;
-            changeMusic(musicConfig.oIndex);
-            play()
-        }
-
-        /**
-         * 切换歌曲
-         * @param {*} index 
-         */
-        function changeMusic(index) {
-            $('.audio').src = musicConfig.musicArr[index];
-        }
-
-        /**
-         * 播放或暂停
-         * @param {*} state 
-         */
-        function play(state) {
-            if (state === 'pause') {
-                $('.audio').pause();
-                musicConfig.playState = false;
-            } else {
-                musicConfig.oAudio.play();
-                musicConfig.playState = true;
-            }
-        }
-
-        $('.audio').onended = function () {
-            musicConfig.oIndex ++
-            if (musicConfig.oIndex === musicConfig.musicArr.length) {
-                musicConfig.oIndex = 0
-            }
-            changeMusic(musicConfig.oIndex)
-            play();
-        }
-
-        /**
-         * 根据时间变化进度条改变
-         */
-        // $('.audio').addEventListener('timeupdate', prograssMove);
-
-        /**
-         * 随机播放
-         */
-
-        function randomPlay() {
-            musicConfig.musicArr = musicConfig.musicArr.sort(function () {
-                return Math.random() - 0.5;
-            })
-        }
-    }
-   
+let search = (function () {
     return function () {
-        var cubePlayer = document.querySelector('.cube-container');
-        // var prev = document.querySelector('.prev');
-        // var next = document.querySelector('.next');
-        // var start = document.querySelector('.start');
-        // var state = false;
-        // cubePlayer.style.animationPlayState = 'running';
-        // cubePlayer.style.animationPlayState = 'paused';
-        let options = {
-            musicArr: ['./music/song_1.mp3', './music/song_2.mp3', './music/song_3.mp3'],
-            musicPics: ['./music/song_1.jpg', './music/song_2.jpg', './music/song_3.jpg'],
+        let cb = debounce(ajaxFunc, 1000);
+        let str = '';
+
+        o$('.text').oninput = function () {
+            cb('post', `http://musicapi.leanapp.cn/search/suggest?keywords=${this.value}`, callback, true);
+            if (!this.value) {
+                o$('.musics').innerHTML = '';
+                o$('.musics').style.display = 'none'
+                str = ''
+                o$('.text').style.borderRadius = `2rem`
+            }
         }
-        player(options)
+
+
+        function callback(data) {
+            if (JSON.parse(data).result) {
+                let result = JSON.parse(data).result.songs;
+                if (result) {
+                    result.forEach(function (ele) {
+                        if (ele) {
+                            getSongInfo(ele.id);
+                        }
+                    })
+                }
+            }
+        }
+        o$('body').onclick = function () {
+            o$('.musics').style.display = 'none';
+            o$('.text').style.borderRadius = `2rem`
+            o$('.musics').innerHTML = ''
+            str = ''
+        }
+        /**
+         * 根据id获取这首歌的信息
+         * @param {*} id 
+         */
+
+        function getSongInfo(id) {
+            ajaxFunc('get', `http://musicapi.leanapp.cn/song/detail?ids=${id}`, success, true);
+
+            /**
+             * 回调函数, 获取歌曲信息后传递的数据
+             * @param {*} data 
+             */
+            function success(data) {
+                console.log(JSON.parse(data));
+                var url = JSON.parse(data).songs[0].al.picUrl; //图片地址
+                var author = JSON.parse(data).songs[0].ar[0].name; //歌手名字
+                var songName = JSON.parse(data).songs[0].al.name; //歌名
+                render(id, url, songName, author);
+            }
+        }
+
+        function render(id, imgUrl, songName, author) {
+            str += `
+                <li>   
+                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=${id}" target='_blank'>
+                    <div class="left-img">
+                    <img src='${imgUrl}'/>
+                    </div>
+                    <div class="right-desc">
+                        <span class="wd-top">${author}</span>
+                        <span class="wd-bottom">${songName}</span>
+                    </div>
+                </a>
+            </li>
+            `
+            o$('.musics').innerHTML = str;
+            o$('.musics').style.display = 'block'
+            o$('.text').style.borderRadius = `2rem 2rem 0 0`;
+        }
     }
 }())
 
+
+/**
+ * 登录区域功能
+ */
+let login = (function () {
+
+
+    // 表单校验
+    /**
+     * data-field-container 容器(必填) data-field 验证的input select等添加的自定义属性名
+     * data-field-prop 验证的属性值 默认是value  data-field-listener 监听的事件 默认是change事件
+     * data-field-error 显示错误消息元素
+     * @param {*} option 一个对象 form元素 所有表单的验证规则 错误后添加的类名
+     */
+    function FormVd(option) {
+        var defaultOption = { //默认配置
+            formDom: document.forms[0],
+            formRules: {},
+            errorClass: 'has-error'
+        }
+        this.option = Object.assign({}, defaultOption, option);
+        let elems = this.getAllElement();
+        let _this = this;
+        this.startValidator = function (isValidate) {
+            for (let i = 0; i < elems.length; i++) {
+                let elem = elems[i];
+                let field = elem.field;
+                elem.doms.forEach(function (ele) {
+                    //注册事件
+                    ele.onfocus = function () {}
+                    // 什么都没输入时也校验
+                    if (isValidate) {
+                        if (!ele.value) {
+                            _this.setStatus(field)
+                        }
+                    }
+                    ele.onblur = function () {
+                        this.style.border = 'none'
+                        //离开时没有设置值也校验
+                        if (!this.value) {
+                            _this.setStatus(field);
+                        }
+                    }
+                    let name = _this.getEventName(ele);
+                    ele.addEventListener(name, function () {
+                        _this.setStatus(field)
+                    })
+                })
+            }
+        }
+        this.startValidator()
+
+    }
+    /**
+     * 获取事件名
+     */
+
+    FormVd.prototype.getEventName = function (el) {
+        let name = FormVd.dataConfig.dataFieldListener;
+        let eventName = el.getAttribute(name);
+        if (!eventName) {
+            eventName = FormVd.dataConfig.dataFieldDefaultListener;
+        }
+        return eventName;
+    }
+
+
+    /**
+     * 得到传入的data-field-container的值下所有要验证的表单下的数据 1
+     */
+
+    FormVd.prototype.getFieldData = function (field) {
+        let fieldContainer = this.getFieldContainer(field);
+        if (!fieldContainer) {
+            return;
+        }
+        let eles = this.getFieldElements(fieldContainer); // 要验证的表单元素
+        let datas = [];
+        eles.forEach(function (ele) {
+            let propName = FormVd.dataConfig.dataFieldProp; //都得到自定义属性名
+            propName = ele.getAttribute(FormVd.dataConfig.dataFieldProp);
+            if (!propName) { //没有data-field-prop
+                propName = FormVd.dataConfig.dataFieldDefaultProp;
+            }
+            let val = ele[propName];
+            // 处理单选和复选框
+            if (ele.type === 'checkbox' || ele.type === 'radio') {
+                if (ele.checked) {
+                    datas.push(val)
+                }
+            } else {
+                datas.push(val);
+            }
+        })
+        if (datas.length === 0) { //没有拿到数据
+            return null;
+        }
+        if (datas.length === 1) {
+            return datas[0];
+        } else {
+            return datas
+        }
+    }
+
+    /**
+     * 得到表单容器'form-item' 1.1
+     */
+
+    FormVd.prototype.getFieldContainer = function (field) {
+        return this.option.formDom.querySelector(`[${FormVd.dataConfig.fieldContainer}=${field}]`);
+    }
+
+    /**
+     * 得到form-item下的所有要验证表单元素data-field 1.2
+     */
+
+    FormVd.prototype.getFieldElements = function (fieldContainer) {
+        return Array.from(fieldContainer.querySelectorAll(`[${FormVd.dataConfig.dataField}]`));
+    }
+
+
+    /**
+     * 验证一个数据
+     * @param {*} 验证的数据
+     * @param {object} 验证规则的对象 
+     * @param {object} 整个表单的数据
+     */
+
+    FormVd.prototype.validateData = function (data, ruleObj, formData) {
+        if (typeof (ruleObj.rule) === 'string') { //规则是预设值
+            let func = FormVd.validators[ruleObj.rule];
+            if (!func) {
+                throw new TypeError("rule is not correct");
+            }
+            if (func(data, formData)) { //验证正确
+                return true;
+            } else {
+                return ruleObj.message
+            }
+
+        } else if (ruleObj.rule instanceof RegExp) { //规则是正则表达式
+            if (!data) {
+                return ruleObj.message;
+            }
+            if (ruleObj.rule.test(data)) {
+                return true
+            } else {
+                return ruleObj.message
+            }
+
+        } else if (typeof (ruleObj.rule) === 'function') {
+            return ruleObj.rule(data, formData)
+        } else {
+            throw new TypeError('rule is not right');
+        }
+    }
+
+    /**
+     * 验证一个form-item表单
+     * 
+     */
+
+    FormVd.prototype.validateField = function (field, formData) {
+        let data = formData[field]; //得到要验证的数据
+        let ruleObjs = this.option.formRules[field]; //验证规则数组
+        if (!ruleObjs) {
+            return true;
+        }
+        for (var i = 0; i < ruleObjs.length; i++) {
+            var ruleObj = ruleObjs[i];
+            let res = this.validateData(data, ruleObj, formData);
+            if (res !== true) {
+                return {
+                    field,
+                    data,
+                    ruleObj,
+                    message: res
+                }
+            }
+        }
+        return true
+    }
+
+
+    /**
+     * 得到所有的表单容器
+     */
+
+    FormVd.prototype.getAllContainers = function () {
+        let dataName = FormVd.dataConfig.fieldContainer;
+        let containers = this.option.formDom.querySelectorAll(`[${dataName}]`);
+        return Array.from(containers);
+    }
+
+    /**
+     * 得到所有要验证的表单元素自定义属性的值
+     */
+
+    FormVd.prototype.getAllElement = function () {
+        let containers = this.getAllContainers();
+        let results = [],
+            _this = this;
+        containers.forEach(function (ele) {
+            let obj = {
+                field: ele.getAttribute(`${FormVd.dataConfig.fieldContainer}`)
+            }
+            obj.doms = _this.getFieldElements(ele);
+            results.push(obj);
+        })
+        return results;
+    }
+
+    /**
+     * 得到所有表单的数据
+     */
+
+    FormVd.prototype.getFormData = function () {
+        let dataName = FormVd.dataConfig.fieldContainer;
+        let containers = Array.from(this.option.formDom.querySelectorAll(`[${FormVd.dataConfig.fieldContainer}]`));
+        let _this = this;
+        let formData = {};
+        containers.forEach(function (ele) {
+            let field = ele.getAttribute(dataName);
+            let data = _this.getFieldData(field);
+            formData[field] = data;
+        })
+        return formData;
+    }
+
+
+    /**
+     * 验证整个或部分表单
+     * 无参，验证整个表单
+     * 有参，验证
+     */
+
+    FormVd.prototype.validate = function () {
+        let formData = this.getFormData(); //得到所有的表单的值
+        let fields;
+        if (arguments.length === 0) {
+            fields = Object.getOwnPropertyNames(formData);
+        } else {
+            fields = Array.from(arguments);
+        }
+        let _this = this;
+        var results = fields.map(function (field) {
+            return _this.validateField(field, formData);
+        }).filter(function (item) {
+            return item !== true;
+        })
+        return results
+    }
+
+
+
+    /**
+     * 设置单个表单的状态
+     * @param {*} validateResult 该表单项的错误信息，如果是undefined || null, 则没有错误
+     * @param {*} field 验证的表单项的名称
+     */
+
+
+    FormVd.prototype.setFieldStatus = function (validateResult, field) {
+        let fieldContainer = this.getFieldContainer(field);
+        // 得到错误元素
+        let errorElement = fieldContainer.querySelector(`[${FormVd.dataConfig.dataFieldError}]`);
+        if (!errorElement) { //如果没有data-field-error的元素
+            errorElement = fieldContainer.querySelector(`.${FormVd.dataConfig.dataFieldDefaultError}`);
+        }
+        if (validateResult) { //有错误
+            errorElement.innerHTML = validateResult.message;
+            fieldContainer.classList.add(this.option.errorClass);
+        } else { //没有错误
+            fieldContainer.classList.remove(this.option.errorClass);
+            if (errorElement) {
+                errorElement.innerHTML = "";
+            }
+        }
+    }
+
+
+    /**
+     * 设置整个表单的状态或某个表单的状态
+     */
+
+    FormVd.prototype.setStatus = function () {
+        if (arguments.length === 0) { //设置全部表达状态
+            let formData = this.getFormData();
+            var fields = Object.getOwnPropertyNames(formData);
+        } else { //设置部分状态
+            var fields = Array.from(arguments);
+        }
+        let results = this.validate.apply(this, fields);
+        let _this = this;
+        fields.forEach(function (field) {
+            //找对应的不符合的，传给setFieldStatus
+            let res = results.find(function (item) {
+                return item.field === field;
+            })
+            _this.setFieldStatus(res, field);
+        })
+
+    }
+    /**
+     * 自定义属性的名字
+     */
+
+    FormVd.dataConfig = {
+        fieldContainer: "data-field-container", //包裹整个表单的容器
+        dataField: 'data-field', //验证的input select 等添加的自定义属性名
+        dataFieldProp: 'data-field-prop', //验证的属性 默认是value
+        dataFieldDefaultProp: "value", //默认验证的属性
+        dataFieldListener: 'data-field-listener', //监听的事件名字 默认监听change事件
+        dataFieldDefaultListener: 'change', //默认的监听的事件名
+        dataFieldError: 'data-field-error', //错误消息的元素添加的自定义属性名
+        dataFieldDefaultError: 'error' //默认错误消息的元素的
+    }
+    /**
+     * 预设的验证规则, 通过返回true, 否则返回false
+     */
+    FormVd.validators = {
+        required: function (data) { //非空验证
+            if (!data) {
+                return false;
+            }
+            if (Array.isArray(data) && data.length === 0) {
+                return false
+            } else {
+                return true;
+            }
+        },
+        mail: function (data) {
+            if (!data) {
+                return false;
+            }
+            let reg = /^\w+@\w+(\.\w+){1, 2}$/;
+            return reg.test(data);
+        },
+        number: function (data) {
+            if (data === null) {
+                return false;
+            }
+            let reg = /^\d+(\.\d+)?$/
+            return reg.test(data);
+        }
+    }
+
+
+    return function () {
+        //默认是密码登录
+        let formValidatorLogin = new FormVd({
+            formDom: o$('.form-login'),
+            formRules: {
+                phone: [{
+                        rule: 'required',
+                        message: "请输入手机号"
+                    },
+                    {
+                        rule: /^\d{11}$/,
+                        message: "手机号格式不正确"
+                    }
+                ],
+                pwd: [{
+                        rule: 'required',
+                        message: '请输入密码',
+                    },
+                    {
+                        rule: /^.{6,12}$/,
+                        message: "密码必须是6-12位"
+                    }
+                ],
+            },
+            errorClass: 'has-error'
+        })
+        //切换到注册
+        o$('.o-register').onclick = function () {
+            o$('.container').classList.add('right-panel-active');
+            formValidatorLogin = null;
+            let formValidatorRegsiter = new FormVd({
+                formDom: o$('.form-resigter'),
+                formRules: {
+                    nickName: [{
+                        rule: 'required',
+                        message: "请输入昵称"
+                    }, ],
+                    phone: [{
+                            rule: 'required',
+                            message: "请输入手机号"
+                        },
+                        {
+                            rule: /^\d{11}$/,
+                            message: "请输入十一位手机号"
+                        }
+                    ],
+                    pwd: [{
+                            rule: 'required',
+                            message: '请输入密码',
+                        },
+                        {
+                            rule: /^.{6,12}$/,
+                            message: "账号必须是6-12位"
+                        }
+                    ],
+                    validatorCode: [{
+                        rule: 'required',
+                        message: "输入验证码"
+                    }]
+
+                },
+                errorClass: 'has-error'
+            })
+            o$('.startRegister').onclick = function () {
+                formValidatorRegsiter.startValidator(true);
+                // ajaxFunc('post', `http://musicapi.leanapp.cn/login/cellphone?phone=${userInfo.phone}&password=${userInfo.pwd}`, callback, true);
+            }
+            o$('.register-phone').focus();
+        }
+        //切换到登录
+        o$('.o-login').onclick = function () {
+            o$('.container').classList.remove('right-panel-active');
+            let formValidatorLogin = new FormVd({
+                formDom: o$('.form-login'),
+                formRules: {
+                    phone: [{
+                            rule: 'required',
+                            message: "请输入手机号"
+                        },
+                        {
+                            rule: /^\d{11}$/,
+                            message: "请输入十一位手机号"
+                        }
+                    ],
+                    pwd: [{
+                        rule: 'required',
+                        message: '请输入密码',
+                    }, ],
+                },
+                errorClass: 'has-error'
+            })
+            o$('.startLogin').onclick = function () {
+                formValidatorLogin.startValidator(true);
+                let userInfo = formValidatorLogin.getFormData();
+                if (formValidatorLogin) {
+                    ajaxFunc('post', `http://musicapi.leanapp.cn/login/cellphone?phone=${userInfo.phone}&password=${userInfo.pwd}`, callback, true);
+                }
+            }
+        }
+
+        //弹出登录框并获得焦点
+        o$('.c-login').onclick = function () {
+            o$('.container').style.transform = `translateY(0)`
+            //自动获得焦点
+            o$('.login-focus').focus();
+        }
+
+        //点击关闭登录窗口
+        o$('.cancle').onclick = function () {
+            o$('.container').style.transform = `translateY(-73rem)`
+        }
+
+        //回车键登录
+        window.onkeydown = function (e) {
+            if (e.keyCode === 13) {
+                o$('.startLogin').click();
+            }
+        }
+
+        let userInfo; //用于保存数据
+
+        //登录
+        o$('.startLogin').onclick = function () {
+            formValidatorLogin.startValidator(true);
+            userInfo = formValidatorLogin.getFormData();
+            if (formValidatorLogin) {
+                ajaxFunc('post', `http://musicapi.leanapp.cn/login/cellphone?phone=${userInfo.phone}&password=${userInfo.pwd}`, callback, true);
+            }
+        }
+
+        //获得最近播放
+        function getRecentPlay(uid) {
+            ajaxFunc('post', `http://musicapi.leanapp.cn/user/record?uid=${uid}&type=1`, getList, true);
+
+            function getList(data) {
+                let str = '';
+                let times = 0
+                data = JSON.parse(data).weekData;
+                if (data.length >= 20) {
+                    for (let i = 0; i < 30; i++) {
+                        times++;
+                        let songName = data[i].song.name;
+                        let author = data[i].song.ar[0].name;
+                        let id = data[i].song.id;
+                        let picUrl = data[i].song.al.picUrl;
+                        str += `
+                        <li>
+                            <a href="#"><img src="${picUrl}" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">${songName}</a>
+                                </p>
+                                <p>
+                                    <a href="#">${author}</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=${id}"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                         </li>
+                        `
+                        if (times === 30) {
+                            o$('.login-items').classList.remove('isHide')
+                            o$('.dis-items').classList.add('isHide');
+                            o$('.login-items').innerHTML = str;
+                        }
+                    }
+
+                } else {
+                    for (let i = 0; i < data.length; i++) {
+                        times++;
+                        let songName = data[i].song.name;
+                        let author = data[i].song.ar[0].name;
+                        let id = data[i].song.id;
+                        let picUrl = data[i].song.al.picUrl;
+                        str += `
+                        <li>
+                            <a href="#"><img src="${picUrl}" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">${songName}</a>
+                                </p>
+                                <p>
+                                    <a href="#">${author}</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=${id}"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                         </li>
+                        `
+                        if (times === data.length) {
+                            o$('.login-items').classList.remove('isHide')
+                            o$('.dis-items').classList.add('isHide');
+                            o$('.login-items').innerHTML = str;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        //得到用户喜欢的歌单
+        function getUserLove() {
+            let items = 0; //限制拿回的数据，不然页面太大
+            //得到用户喜欢的歌单
+            ajaxFunc('post', `http://musicapi.leanapp.cn/login/cellphone?phone=${localStorage.getItem('phone')}&password=${localStorage.getItem('pwd')}`, getUserId, true);
+
+            function getUserId(data) {
+                //拿到id
+                ajaxFunc('post', `http://musicapi.leanapp.cn/user/playlist?uid=${JSON.parse(data).account.id}`, getSongList, true);
+            }
+
+            function getSongList(data) {
+                // 得到歌单id
+                let len = JSON.parse(data).playlist.length;
+                let arr = JSON.parse(data).playlist;
+                for (let i = 0; i < len; i++) {
+                    ajaxFunc('post', `http://musicapi.leanapp.cn/playlist/detail?id=${arr[i].id}`, songList, true);
+                }
+
+            }
+            let str = '';
+            let len;
+
+            function songList(data) {
+                len = JSON.parse(data).playlist.trackIds.length;
+                let arr = JSON.parse(data).playlist.trackIds;
+                for (let i = 0; i < len; i++) {
+                    ajaxFunc('get', `http://musicapi.leanapp.cn/song/detail?ids=${arr[i].id}`, myFavorite, true);
+                }
+            }
+
+            function myFavorite(data) {
+                let id = JSON.parse(data).songs[0].id;
+                let url = JSON.parse(data).songs[0].al.picUrl; //图片
+                let author = JSON.parse(data).songs[0].ar[0].name; //歌手
+                let songName = JSON.parse(data).songs[0].al.name; //歌名
+                render(id, url, author, songName)
+            }
+            //渲染
+            function render(id, url, author, songName) {
+                items++;
+                if (len >= 100) { //歌曲长度大于80
+                    str += `
+                    <li class="music-item">
+                        <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=${id}" target='_blank'><img src="${url}" alt="" target='_blank'></a>
+                        <div class="desc">
+                            <p>${author}</p>
+                            <p>${songName}</p>
+                        </div>
+                    </li>
+                    `
+                    if (items === 100) {
+                        o$('.favorite-music').innerHTML = str;
+                        o$('.o-favorite').style.display = 'block';
+
+                    }
+                } else { //歌曲长度小于80
+                    str += `
+                    <li class="music-item">
+                        <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=${id}" target='_blank'><img src="${url}" alt="" target='_blank'></a>
+                        <div class="desc">
+                            <p>${author}</p>
+                            <p>${songName}</p>
+                        </div>
+                    </li>
+                    `
+                    if (items === len) {
+                        o$('.favorite-music').innerHTML = str;
+                        o$('.o-favorite').style.display = 'block';
+                    }
+                }
+            }
+        }
+
+
+        // 刷新时登陆
+        if (localStorage.getItem('phone')) {
+            ajaxFunc('post', `http://musicapi.leanapp.cn/login/cellphone?phone=${localStorage.getItem('phone')}&password=${localStorage.getItem('pwd')}`, callback, true);
+        }
+
+
+        function callback(data) {
+            let url = JSON.parse(data).profile
+            if (!url) {
+                o$('.login-container').classList.add('error-login')
+            } else { //登录成功
+                for (let prop in userInfo) {
+                    localStorage.setItem(prop, userInfo[prop]);
+                }
+                o$('.h-nav').classList.add('login-register');
+                o$('.c-login').classList.add('success-login');
+                o$('.success-login').style.backgroundImage = `url(${JSON.parse(data).profile.avatarUrl})`;
+                o$('.container').style.transform = `translateY(-73rem)`;
+                o$('.c-login').onclick = null;
+                o$('.success-login').onmouseenter = o$('.person-msg').onmouseenter = function () {
+                    o$('.person-msg').style.height = "20rem";
+                }
+                o$('.success-login').onmouseleave = o$('.person-msg').onmouseleave = function () {
+                    o$('.person-msg').style.height = "0rem";
+                }
+                let uid = JSON.parse(data).profile.userId;
+
+                //设置个人信息的地址
+                o$('.p-info').href = `file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/userDetail.html?id=${uid}`
+
+                //获取用户最近播放
+                getRecentPlay(uid)
+
+
+
+                getUserLove();
+                //登出
+                o$('.logout').onclick = function () {
+                    //清除localStore
+                    localStorage.clear();
+                    //清除类名
+                    o$('.h-nav').classList.remove('login-register');
+                    o$('.success-login').style.backgroundImage = '';
+                    o$('.success-login').onmouseenter = null;
+                    o$('.c-login').classList.remove('success-login');
+                    o$('.person-msg').style.height = '0';
+                    //弹出登录框并获得焦点
+                    o$('.c-login').onclick = function () {
+                        o$('.container').style.transform = `translateY(0)`
+                        //自动获得焦点
+                        o$('.login-focus').focus();
+                    }
+                    //将用户喜欢的歌单清空
+                    o$('.favorite-music').innerHTML = ''
+                    o$('.o-favorite').style.display = 'none'
+                    o$('.isHide').classList.remove('isHide')
+                    o$('.login-items').classList.add('isHide')
+                }
+            }
+        }
+        //注册
+        o$('.getValidatorCode').onclick = function () {
+            let validatorPhone = o$('.validator-phone');
+            let isShow = o$('.is-show');
+            let phoneError = o$('.phone-error')
+            let registerPhone = o$('.register-phone');
+            //校验手机号
+            if (o$('.data-validator').value && /^\d{11}$/.test($('.data-validator').value)) {
+                isShow.style.display = 'block';
+                isShow.style.opacity = '1';
+                validatorPhone.style.opacity = 0;
+                validatorPhone.style.display = 'none';
+            } else if ($('.data-validator').value.length !== 11) { //手机号位数不够
+                phoneError.innerText = "请您输入十一位手机号"
+                registerPhone.classList.add('has-error');
+            } else if (!/^\d+$/.test($('.data-validator').value)) { //不是数字
+                phoneError.innerText = "请您输入十一位数字的手机号"
+                registerPhone.classList.add('has-error');
+            } else if (!$('.data-validator').value) { //没有输入值
+                phoneError.innerText = "请您输入手机号"
+                registerPhone.classList.add('has-error');
+            }
+        }
+
+    }
+}())
+
+/**
+ * 导航栏切换
+ */
+
+let navSwitch = (function () {
+    return function () {
+        let oMain = o$('.main');
+        let myFavorite = o$('.my-favorite');
+        //导航栏切换
+        o$('.o-favorite').onclick = function (e) {
+            oMain.style.transform = 'translateX(-100%)';
+            myFavorite.style.transform = 'translateX(0)'
+            o$('.active').classList.remove('active');
+            this.classList.add('active');
+        }
+
+        o$('.nav-main').onclick = function (e) {
+            oMain.style.transform = 'translateX(0%)';
+            myFavorite.style.transform = 'translateX(100%)'
+            o$('.active').classList.remove('active');
+            this.classList.add('active');
+        }
+    }
+}())
 
 /**
  * 启动所有函数的初始化函数
@@ -653,7 +1567,9 @@ function init() {
     rank();
     showSinger();
     mvRotate();
-    asidePlayer()
+    search();
+    login();
+    navSwitch();
 }
 
 init();

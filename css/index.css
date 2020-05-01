@@ -40,7 +40,6 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   text-align: center;
-  text-shadow: 1px 2px 2px #ccc;
 }
 
 .mt-5 {
@@ -58,28 +57,38 @@ html {
 }
 
 body {
-  background: #f5f5f5;
+  background: #3a6168;
   font-size: 1.6rem;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 /* 头部 */
+
 .header {
-  height: 7;
-  /* background-image: linear-gradient(135deg, #f761a1 10%, #8c1bab 100%); */
-  background: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: #3a6168;
 }
 
 .header .h-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 110rem;
-  margin: 0 auto;
   height: 7rem;
+  margin: 0 auto;
 }
 
 .h-container .h-logo {
-  width: 17.6rem;
+  width: 17.8rem;
   height: 7rem;
   overflow: hidden;
-  background: url("../assets/imgs/spirit.png") no-repeat 0px 0px;
+  background: url("../assets/imgs/music.jpg") no-repeat top left / 100% 100%;
+  cursor: pointer;
 }
 
 .h-container .h-logo span {
@@ -87,35 +96,354 @@ body {
 }
 
 .h-container .h-nav {
+  position: relative;
   display: flex;
+  align-items: center;
   width: 50.8rem;
   height: 100%;
-  justify-content: space-around;
   margin-left: 8px;
   color: #ccc;
 }
 
 .h-container .h-nav .nav-item {
+  position: relative;
   height: 100%;
   line-height: 7rem;
   text-align: center;
   padding: 0 1.9rem;
   font-size: 1.4rem;
+  margin-right: 1rem;
+  cursor: pointer;
 }
 
-.h-container .h-nav .nav-item:nth-of-type(1) {
-  background: #B33771;
-  color: #fff;
+.h-container .h-nav .o-favorite {
+  display: none;
+}
+
+.h-container .login-register .success-login {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-position: top left;
+  background-size: 100% 100%;
+  margin-left: 2rem;
+  font-size: 0;
+}
+
+.h-container .h-nav .nav-item a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .h-container .h-nav .nav-item:nth-of-type(6) {
   position: relative;
 }
 
-.h-container .h-nav .nav-item:hover {
-  background: #B33771;
+.h-container .h-nav .nav-item:not(.success-login):hover {
+  background: #b33771;
   color: #fff;
 }
+
+.header .h-container .h-nav .nav-item.active {
+  background: #b33771 !important;
+  color: #fff !important;
+}
+
+.h-container .h-nav .person-msg {
+  position: absolute;
+  top: 7rem;
+  left: 32rem;
+  width: 10rem;
+  background: #fff;
+  z-index: 10;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.5s ease-in;
+  height: 0;
+  overflow: hidden;
+}
+
+.h-container .h-nav .person-msg li {
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+}
+
+.h-container .h-nav .person-msg li:hover {
+  background: #008c8c;
+  color: #fff;
+}
+
+/* 登录区域 */
+
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 76.8rem;
+  max-width: 100%;
+  height: 48rem;
+  margin-top: -24rem;
+  margin-left: -38.4rem;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.2), 0 1rem 1rem rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transform: translateY(-73rem);
+  transition: transform 0.5s ease-in-out;
+  z-index: 100;
+}
+
+.form-container .is-show {
+  width: 100%;
+  opacity: 0;
+  display: none;
+  transition: all 0.5s;
+}
+
+.form-container .validator-phone {
+  width: 100%;
+  transition: 0.5s;
+}
+
+.form-container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  flex-direction: column;
+  padding: 0 3rem;
+}
+
+.form-container .social-container {
+  margin: 1rem 0;
+}
+
+.form-container .social-container a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  height: 4rem;
+  width: 4rem;
+}
+
+.form-container input {
+  background: #eee;
+  border: none;
+  padding: 1.2rem 1.5rem;
+  margin: 0.5rem 0;
+  width: 100%;
+  border-radius: 2rem;
+  box-sizing: border-box;
+}
+
+.form-container h2 {
+  font-size: 3rem;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.form-container button {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 2rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1.2rem 4.5rem;
+  background: #008c8c;
+  letter-spacing: 0.1rem;
+  transition: transform 0.08s ease-in;
+  cursor: pointer;
+}
+
+.form-container button:active {
+  transform: scale(0.95);
+}
+
+.o-login,
+.o-register {
+  background: #008c8c;
+  padding: 1.2rem 4.5rem;
+  border-radius: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.8s ease-out;
+}
+
+.login-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.form-item {
+  width: 100%;
+}
+
+.register-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.tip-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.8s ease-in-out;
+  z-index: 100;
+  font-size: 2rem;
+}
+
+.tip-container p {
+  font-size: 1.8rem;
+  font-weight: 100;
+  line-height: 2;
+  letter-spacing: 0.05rem;
+  margin: 2rem 0 3rem;
+}
+
+.tip-container .tip {
+  position: relative;
+  left: -100%;
+  background: #9b59b6;
+  background: linear-gradient(to right, #ff4b2b, #ff416c) no repeat 0 0 / cover;
+  color: #fff;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.8s ease-in-out;
+}
+
+.tip-panel {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4rem;
+  text-align: center;
+  transform: translateX(0);
+  transition: transform 0.8s ease-in-out;
+}
+
+.tip-panel h2 {
+  font-size: 3rem;
+}
+
+.tip-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.tip-left {
+  transform: translateX(-20%);
+}
+
+.has-error .error {
+  color: #f55;
+  visibility: visible;
+}
+
+.show-login-error {
+  visibility: hidden;
+}
+
+.error-login .show-login-error {
+  color: rgb(255, 155, 0);
+  visibility: visible;
+}
+
+.error {
+  height: 2rem;
+  visibility: hidden;
+}
+
+.cancle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  z-index: 300;
+}
+
+.cancle::before,
+.cancle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -1rem;
+  margin-left: -0.15rem;
+  width: 0.3rem;
+  height: 2rem;
+  background: #fff;
+  z-index: 400;
+}
+
+.cancle::before {
+  transform: rotate(45deg);
+}
+
+.cancle::after {
+  transform: rotate(-45deg);
+}
+
+/* 将登录页移到右侧 */
+.container.right-panel-active .login-container {
+  transform: translateX(100%);
+}
+
+/* 右侧移到左侧 */
+.container.right-panel-active .tip-container {
+  transform: translateX(-100%);
+}
+
+/* 移动注册页到右侧,显示并且覆盖登录页 */
+.container.right-panel-active .register-container {
+  opacity: 1;
+  z-index: 6;
+  transform: translateX(100%);
+}
+
+.container.right-panel-active .tip {
+  transform: translateX(50%);
+}
+
+/* 有文字从左往右进的效果 */
+.container.right-panel-active .tip-left {
+  transform: translateX(0);
+}
+/* 有文字从右往左进的效果 */
+.container.right-panel-active .tip-right {
+  transform: translateX(20%);
+}
+
+/* 登录区域结束 */
 
 .h-container .search {
   display: flex;
@@ -124,113 +452,249 @@ body {
   color: #ccc;
 }
 
-.h-container .search .form .o-search {
-  position: relative;
-  height: 3rem;
-  width: 20rem;
-  box-shadow: 1px 2px 2px #ccc;
-  line-height: 3rem;
-  background: #fff;
-  padding-left: 3rem;
-  overflow: hidden;
+.h-container .search input {
+  width: 35rem;
+  padding: 1rem;
   border-radius: 2rem;
 }
 
-.h-container .search .form .o-search .search-ico {
-  position: absolute;
-  top: 8px;
-  left: 9px;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: url("../assets/imgs/spirit.png") no-repeat;
-  background-position: -9px -107px;
-}
-
-/* 头部结束 */
-
-/*主体部分  */
-.main-banner {
-  height: 28.5rem;
-  margin-top: 1rem;
-  background: linear-gradient(to right, #f9957f, #f2f5d0);
-  background-size: 600rem !important;
-  background-position: 50% 50% !important;
-}
-
-.main-banner .wrap-ban {
+.h-container .search .form .o-search {
   position: relative;
-  width: 73rem;
-  height: 100%;
+  line-height: 3rem;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.h-container .search .form .o-search .iconfont {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3.6rem;
+  height: 3.6rem;
+  text-align: center;
+  line-height: 3.6rem;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
+.musics {
+  position: absolute;
+  top: 3.6rem;
+  left: 0;
+  width: 35rem;
   margin: 0 auto;
+  margin-top: -1px;
+  border-radius: 0 0 1rem 1rem;
+  z-index: 10;
+  overflow: hidden;
+  background: #fff;
+  padding: 0.5rem;
+  display: none;
 }
 
-.main-banner .wrap-ban .banner {
-  position: relative;
-  width: 73rem;
+.musics li {
+  width: 100%;
+  height: 6rem;
+  margin-top: 0.3rem;
+  font-size: 1.3rem;
+}
+
+.musics .left-img {
+  float: left;
+  width: 6rem;
+  height: 100%;
+  margin-right: 1rem;
+}
+
+.musics .right-desc {
+  float: left;
+  width: 26rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 6rem;
+  font-size: 1.7rem;
+}
+
+.musics a {
+  display: flex;
   height: 100%;
 }
 
-.main-banner .wrap-ban .banner img {
-  position: absolute;
+.musics img {
   width: 100%;
   height: 100%;
 }
 
-.main-banner .wrap-ban .arrow {
+.musics li:hover {
+  background: #3a6168;
+  color: #fff;
+}
+
+/* 头部结束 */
+
+/* 不同模块切换 */
+
+.change-mode {
+  position: relative;
+  margin-top: 7rem;
+}
+
+/*主体部分  */
+.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.6s;
+  margin: 0 auto;
+}
+
+.wrap-banner {
+  background-size: 800rem;
+}
+
+.banner {
+  position: relative;
+  width: 100rem;
+  height: 28rem;
+  margin: 0 auto;
+}
+
+.banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(13rem);
+}
+
+.banner .b-imgs {
+  width: 100%;
+  height: 25rem;
+}
+
+.banner .arrow {
   position: absolute;
   top: 50%;
   width: 3.7rem;
   height: 6.3rem;
-  margin-top: -3.1rem;
+  margin-top: -3.15rem;
   cursor: pointer;
+  z-index: 100;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-.main-banner .wrap-ban .arrow:hover {
-  background-color: rgba(0, 0, 0, 0);
+.banner:hover .arrow {
+  display: block; 
 }
 
-.main-banner .wrap-ban .left-arrow {
-  left: -6rem;
-  background-image: url("../assets/imgs/banner/b-spirit.png");
-  background-position: 0 -36rem;
+.banner .left-arrow {
+  left: 0;
+  background-image: url(../assets/imgs/b-spirit.png);
+  background-position-y: -36rem;
 }
 
-.main-banner .wrap-ban .right-arrow {
-  right: -6rem;
-  background-image: url("../assets/imgs/banner/b-spirit.png");
+.banner .right-arrow {
+  right: 0;
+  background-image: url("../assets/imgs/b-spirit.png");
   background-position: 0 -50.8rem;
 }
 
-.main-banner .wrap-ban .left-arrow:hover {
-  background-position: 0 -43rem;
+.banner .left-arrow:hover {
+  background-position-y: -43rem;
 }
 
-.main-banner .wrap-ban .right-arrow:hover {
-  background-position: 0 -57.8rem;
+.banner .right-arrow:hover {
+  background-position-y: -57.8rem;
 }
 
-.main-banner .wrap-ban .banner .dots {
+.banner .b-imgs .wrapper-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.banner .wrapper-img li {
   position: absolute;
-  display: flex;
-  bottom: 1rem;
-  right: 0;
-  left: 0;
+  height: 25rem;
+  width: 73rem;
+  transition: all 0.4s linear;
+}
+
+.banner .wrapper-img li img {
+  height: 100%;
+  width: 100%;
+}
+
+.banner .wrapper-img li.item1 {
+  transform: scale(0.9);
+  transform-origin: 0 100%;
+}
+
+.banner .wrapper-img li.item2 {
+  transform: translateX(13.2rem);
+  z-index: 3;
+  transform-origin: 100% 100%;
+}
+
+.banner .wrapper-img li.item3 {
+  transform: translateX(73rem) scale(0.9);
+  transform-origin: 100% 100%;
+  z-index: 1;
+}
+
+.banner .wrapper-img li.item4 {
+  transform: translateX(76.2rem) scale(0.9);
+  transform-origin: 100% 100%;
+}
+
+.banner .wrapper-img li.item5 {
+  transform: translateX(100rem) scale(0.9);
+  transform-origin: 100% 100%;
+}
+
+.banner .wrapper-img li.item6 {
+  transform: translateX(173rem) scale(0.9);
+  transform-origin: 100% 100%;
+}
+
+.banner .wrapper-img li.item7 {
+  transform: translateX(246rem) scale(0.9);
+  transform-origin: 100% 100%;
+}
+
+.banner .wrapper-img li.item8 {
+  transform: translateX(319rem) scale(0.9);
+  transform-origin: 100% 100%;
+}
+
+.banner .wrapper-img li.item9 {
+  transform: translateX(392rem) scale(0.9);
+  transform-origin: 100% 100%;
+}
+
+.banner .dots {
+  position: relative;
+  width: 32rem;
+  height: 3rem;
   margin: 0 auto;
-  width: 40rem;
-  height: 2rem;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.main-banner .wrap-ban .banner .dots span {
-  height: 1rem;
-  width: 1rem;
   cursor: pointer;
-  border-radius: 50%;
-  background: #ccc;
+  z-index: 2;
 }
 
-.main-banner .wrap-ban .banner .dots span.active {
+.banner .dots span {
+  display: inline-block;
+  height: 0.5rem;
+  width: 3rem;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.banner .dots span.active {
   background: #f40;
 }
 
@@ -244,12 +708,11 @@ body {
   margin-top: 2rem;
 }
 
-/* 新碟首发 */
+/* 最近常听 */
 
 .music .dis-launch {
   width: 100%;
   padding: 0.5rem;
-  /* background: #8e44ad; */
 }
 
 .music .dis-launch .d-title {
@@ -257,45 +720,7 @@ body {
   text-align: center;
 }
 
-.sort-nav {
-  height: 4rem;
-  line-height: 4rem;
-  margin-top: 1rem;
-  box-shadow: 1px 2px 2px #18dcff;
-  background: #1abc9c;
-}
-
-.nav-items {
-  width: 30rem;
-  height: 100%;
-  margin: 0 auto;
-}
-
-.nav-items li {
-  position: relative;
-  float: left;
-  height: 100%;
-  width: 5rem;
-  text-align: center;
-}
-
-.nav-items li.active {
-  color: #8e44ad;
-}
-
-.tri-active::after {
-  position: absolute;
-  bottom: 0;
-  left: 2rem;
-  display: block;
-  width: 0;
-  height: 0;
-  border: 0.5rem solid transparent;
-  border-bottom-color: #fff;
-  content: "";
-}
-
-.music .dis-launch .dis-items {
+.music .dis-launch .recent-cm {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -303,7 +728,11 @@ body {
   width: 100%;
 }
 
-.music .dis-launch .dis-items li {
+.music .dis-launch .isHide {
+  display: none;
+}
+
+.music .dis-launch .recent-cm li {
   position: relative;
   width: 20rem;
   height: 23rem;
@@ -313,18 +742,18 @@ body {
   overflow: hidden;
 }
 
-.music .dis-launch .dis-items li:hover {
+.music .dis-launch .recent-cm li:hover {
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
   transform: translate3d(0, -2px, 0);
 }
 
-.music .dis-launch .dis-items li img {
+.music .dis-launch .recent-cm li img {
   width: 100%;
   height: 100%;
   transition: all 0.4s;
 }
 
-.music .dis-launch .dis-items .desc-wd {
+.music .dis-launch .recent-cm .desc-wd {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -337,18 +766,18 @@ body {
   color: #fff;
 }
 
-.music .dis-launch .dis-items .desc-wd p {
+.music .dis-launch .recent-cm .desc-wd p {
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.music .dis-launch .dis-items .desc-wd p:hover {
+.music .dis-launch .recent-cm .desc-wd p:hover {
   color: #31c27c;
 }
 
-.music .dis-launch .dis-items .ico-play {
+.music .dis-launch .recent-cm .ico-play {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -360,7 +789,7 @@ body {
   z-index: 3;
 }
 
-.music .dis-launch .dis-items .dis-modal {
+.music .dis-launch .recent-cm .dis-modal {
   position: absolute;
   top: 0;
   left: 0;
@@ -370,9 +799,9 @@ body {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.music .dis-launch .dis-items li:hover .ico-play,
-.music .dis-launch .dis-items li:hover .dis-modal,
-.music .dis-launch .dis-items li:hover .desc-wd {
+.music .dis-launch .recent-cm li:hover .ico-play,
+.music .dis-launch .recent-cm li:hover .dis-modal,
+.music .dis-launch .recent-cm li:hover .desc-wd {
   animation: iconShow 0.4s linear forwards;
 }
 
@@ -385,12 +814,11 @@ body {
   }
 }
 
-/* 新碟首发结束  */
+/* 最近常听结束  */
 
 /* 精彩推荐 */
 .hot-recommend {
   width: 100%;
-  /* background: #00cec9; */
   padding: 0.5rem;
 }
 
@@ -448,34 +876,32 @@ body {
   display: none;
 }
 
-.r-banner .r-arrow .left,
-.r-banner .r-arrow .right {
+.r-banner .r-arrow .arrow-left,
+.r-banner .r-arrow .arrow-right {
   position: absolute;
-  top: 100px;
-  width: 27px;
-  height: 30px;
-  background: orange;
+  top: 50%;
+  width: 2.7rem;
+  height: 6.3rem;
+  margin-top: -3.15rem;
   text-align: center;
   line-height: 30px;
   font-size: 20px;
-  background: rgba(0, 0, 0, 0.3);
   color: #fff;
   cursor: pointer;
 }
 
-.r-banner .r-arrow .left:hover,
-.r-banner .r-arrow .right:hover {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.r-banner .r-arrow .left {
-  left: 0px;
+.r-banner .r-arrow .arrow-left {
+  left: 1rem;
   border-radius: 0 20px 20px 0;
+  background: url("../assets/imgs/b-spirit.png");
+  background-position-y: -36rem;
 }
 
-.r-banner .r-arrow .right {
-  right: 0px;
+.r-banner .r-arrow .arrow-right {
+  right: 1rem;
   border-radius: 20px 0 0 20px;
+  background: url("../assets/imgs/b-spirit.png");
+  background-position: -2px -50.8rem;
 }
 /* 精彩推荐结束 */
 
@@ -483,7 +909,6 @@ body {
 
 .rank {
   padding: 2rem;
-  background: #3498db;
 }
 
 .rank-wrapper {
@@ -514,7 +939,7 @@ body {
   transition: height 0.5s linear 0.5s, width 0.5s linear;
 }
 
-.rank-wrapper .rank-items .item:hover .bg  {
+.rank-wrapper .rank-items .item:hover .bg {
   transform: scale(1.05, 1.05);
 }
 
@@ -596,23 +1021,28 @@ body {
   transition: all 0.3s;
 }
 
-.rank-wrapper .rank-items .active:nth-of-type(1) .inner .bg, .rank-wrapper .rank-items .item:nth-of-type(1) .inner .bg {
+.rank-wrapper .rank-items .active:nth-of-type(1) .inner .bg,
+.rank-wrapper .rank-items .item:nth-of-type(1) .inner .bg {
   background: #cb6f88;
 }
 
-.rank-wrapper .rank-items .active:nth-of-type(2) .inner .bg, .rank-wrapper .rank-items .item:nth-of-type(2) .inner .bg {
+.rank-wrapper .rank-items .active:nth-of-type(2) .inner .bg,
+.rank-wrapper .rank-items .item:nth-of-type(2) .inner .bg {
   background: #6b97b2;
 }
 
-.rank-wrapper .rank-items .active:nth-of-type(3) .inner .bg, .rank-wrapper .rank-items .item:nth-of-type(3) .inner .bg {
+.rank-wrapper .rank-items .active:nth-of-type(3) .inner .bg,
+.rank-wrapper .rank-items .item:nth-of-type(3) .inner .bg {
   background: #6cb8ac;
 }
 
-.rank-wrapper .rank-items .active:nth-of-type(4) .inner .bg, .rank-wrapper .rank-items .item:nth-of-type(4) .inner .bg {
+.rank-wrapper .rank-items .active:nth-of-type(4) .inner .bg,
+.rank-wrapper .rank-items .item:nth-of-type(4) .inner .bg {
   background: #518d95;
 }
 
-.rank-wrapper .rank-items .active:nth-of-type(5) .inner .bg, .rank-wrapper .rank-items .item:nth-of-type(5) .inner .bg {
+.rank-wrapper .rank-items .active:nth-of-type(5) .inner .bg,
+.rank-wrapper .rank-items .item:nth-of-type(5) .inner .bg {
   background: #e49b72;
 }
 
@@ -643,7 +1073,7 @@ body {
   margin-top: 0.5rem;
   width: 5rem;
   height: 5rem;
-  background: url('../assets/imgs/cover_play.png') no-repeat top left / cover;
+  background: url("../assets/imgs/cover_play.png") no-repeat top left / cover;
   display: none;
   opacity: 0;
   transition: all 0.5s;
@@ -731,34 +1161,64 @@ body {
 
 /* 排行榜结束 */
 
-/* MV */
+/* 推荐音乐 */
 
-.mv {
+.lasest-recommend {
   padding: 1rem;
   padding-top: 1rem;
-  /* background: #34495e; */
 }
 
-.wrap-mv {
+.lastest-recommend .m-title,
+.lastest-recommend .sort-nav {
+  display: none;
+}
+
+.sort-nav {
+  height: 4rem;
+  line-height: 4rem;
+  margin-top: 1rem;
+  background: rgba(38, 37, 112, 0.6);
+}
+
+.nav-items {
+  width: 30rem;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.nav-items li {
+  position: relative;
+  float: left;
+  height: 100%;
+  width: 5rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nav-items li .wd-active {
+  color: #8e44ad;
+}
+
+.wrap-lastest-item {
   width: 100%;
   margin-top: 2rem;
 }
 
-.wrap-mv ul {
+.wrap-lastest-item ul {
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.wrap-mv ul li {
+.wrap-lastest-item ul li {
   width: 200px;
   height: 200px;
   perspective: 700px;
   margin-bottom: 1rem;
 }
 
-.wrap-mv .picbox {
+.wrap-lastest-item .picbox {
   position: relative;
   width: 100%;
   height: 100%;
@@ -767,18 +1227,18 @@ body {
   animation: 0.3s ease-out forwards;
 }
 
-.wrap-mv .picbox .show,
-.wrap-mv .picbox .hide {
+.wrap-lastest-item .picbox .show,
+.wrap-lastest-item .picbox .hide {
   width: 100%;
   height: 100%;
 }
 
-.wrap-mv .picbox .show img {
+.wrap-lastest-item .picbox .show img {
   width: 100%;
   height: 100%;
 }
 
-.wrap-mv .picbox .hide {
+.wrap-lastest-item .picbox .hide {
   position: absolute;
   top: 0;
   left: 0;
@@ -790,7 +1250,7 @@ body {
   transform: translate3d(0, 0, -1px);
 }
 
-.wrap-mv .picbox .hide p {
+.wrap-lastest-item .picbox .hide p {
   position: relative;
   width: 80%;
   z-index: 9999;
@@ -799,77 +1259,77 @@ body {
   text-overflow: ellipsis;
 }
 
-.wrap-mv .picbox .hide p:hover {
-  color: #1ABC9C;
+.wrap-lastest-item .picbox .hide p:hover {
+  color: #1abc9c;
 }
 
-.wrap-mv .picbox .hide .play {
+.wrap-lastest-item .picbox .hide .play {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 5rem;
   height: 5rem;
-  background: url('../assets/imgs/cover_play.png') no-repeat top left / cover; 
+  background: url("../assets/imgs/cover_play.png") no-repeat top left / cover;
   opacity: 0;
   transition: all 0.5s linear 0.2s;
 }
 
-.wrap-mv .picbox .hide:hover .play {
+.wrap-lastest-item .picbox .hide:hover .play {
   opacity: 1;
 }
 
-.wrap-mv .picbox .hide .iconfont {
-   margin-right: 0.3rem;
+.wrap-lastest-item .picbox .hide .iconfont {
+  margin-right: 0.3rem;
 }
 
-.wrap-mv .i-top .picbox .hide,
-.wrap-mv .o-top .picbox .hide {
+.wrap-lastest-item .i-top .picbox .hide,
+.wrap-lastest-item .o-top .picbox .hide {
   transform-origin: bottom;
   transform: translate3d(0, -100%, 0) rotate3d(1, 0, 0, 90deg);
 }
-.wrap-mv .i-bottom .picbox .hide,
-.wrap-mv .o-bottom .picbox .hide {
+.wrap-lastest-item .i-bottom .picbox .hide,
+.wrap-lastest-item .o-bottom .picbox .hide {
   transform-origin: top;
   transform: translate3d(0, 100%, 0) rotate3d(1, 0, 0, -90deg);
 }
-.wrap-mv .i-right .picbox .hide,
-.wrap-mv .o-right .picbox .hide {
+.wrap-lastest-item .i-right .picbox .hide,
+.wrap-lastest-item .o-right .picbox .hide {
   transform-origin: left;
   transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, 90deg);
 }
-.wrap-mv .i-left .picbox .hide,
-.wrap-mv .o-left .picbox .hide {
+.wrap-lastest-item .i-left .picbox .hide,
+.wrap-lastest-item .o-left .picbox .hide {
   transform-origin: right;
   transform: translate3d(-100%, 0, 0) rotate3d(0, 1, 0, -90deg);
 }
 
-.wrap-mv .i-top .picbox {
+.wrap-lastest-item .i-top .picbox {
   animation-name: i-top;
 }
- 
-.wrap-mv .o-top .picbox {
+
+.wrap-lastest-item .o-top .picbox {
   animation-name: o-top;
 }
 
-.wrap-mv .i-bottom .picbox {
+.wrap-lastest-item .i-bottom .picbox {
   animation-name: i-bottom;
 }
-.wrap-mv .o-bottom .picbox {
+.wrap-lastest-item .o-bottom .picbox {
   animation-name: o-bottom;
 }
 
-.wrap-mv .i-right .picbox {
+.wrap-lastest-item .i-right .picbox {
   animation-name: i-right;
 }
-.wrap-mv .o-right .picbox {
+.wrap-lastest-item .o-right .picbox {
   animation-name: o-right;
 }
 
-.wrap-mv .i-left .picbox {
+.wrap-lastest-item .i-left .picbox {
   animation-name: i-left;
 }
-.wrap-mv .o-left .picbox {
+.wrap-lastest-item .o-left .picbox {
   animation-name: o-left;
 }
 
@@ -938,17 +1398,13 @@ body {
   }
 }
 
-
-
-/* MV结束 */
-
+/* 推荐音乐结束 */
 
 /* 歌星介绍 */
 .show-singer {
   width: 100%;
   padding: 0.5rem;
   padding-top: 2rem;
-  background: #a29bfe;
 }
 
 .wrap-box {
@@ -964,6 +1420,7 @@ body {
   height: 20rem;
   overflow: hidden;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .box .img,
@@ -1097,97 +1554,79 @@ body {
 
 /* 歌星介绍介绍 */
 
-
-/* 侧栏播放器 */
-.cube-player {
-  position: fixed;
-  top: 47rem;
-  width: 20rem;
-  height: 20rem;
-  background: #ccc;
-  perspective: 80rem;
-}
-
-
-.cube-player .control {
-  margin-right: 2rem;
-  width: 6rem;
-  height: 3rem;
-  background: rgba(100, 206, 206, 0.5);
-}
-
-.cube-player div {
+.my-favorite {
   position: absolute;
   top: 0;
-  bottom: 0;
-  right: 0;
   left: 0;
-  margin: auto;
-  width: 10rem;
-  height: 10rem;
-  text-align: center;
-  line-height: 10rem;
-  font-size: 3rem;
-  transition: all 5s;
-  backface-visibility: hidden;
+  width: 100%;
+  padding: 2rem 10rem;
+  transition: all 0.6s;
+  transform: translateX(100%);
 }
 
-
-.cube-player .wrap {
+.my-favorite .favorite-music {
   display: flex;
+  justify-content: space-around;
+  width: 119rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  margin: 0 auto;
+  min-width: 110rem;
+  margin-top: 1rem;
+}
+
+.my-favorite .favorite-music .music-item {
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+  margin-bottom: 1rem;
+  box-shadow: 3px 10px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s;
+}
+
+.my-favorite .favorite-music .music-item a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.my-favorite .favorite-music .music-item img {
+  width: 100%;
+  height: 100%;
+}
+
+.my-favorite .favorite-music .music-item .desc {
   position: absolute;
-  top: 21rem;
+  bottom: 0;
   left: 0;
-  width: auto;
-  height: auto;
-  transition: none;
+  width: 100%;
+  height: 5rem;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 1.8rem;
+  padding-left: 0.5rem;
+  color: #ccc;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
 }
 
-.cube-container {
-  transform-style: preserve-3d;
-  animation: loop 5s linear infinite paused;
+.my-favorite .favorite-music .music-item:hover .desc {
+  height: 5rem;
 }
 
-
-@keyframes loop {
-  from {
-      transform: rotateX(30deg) rotateY(30deg);
-  }
-
-  to {
-      transform: rotateX(360deg) rotateY(360deg);
-  }
+.my-favorite .favorite-music .music-item:hover {
+  transform: translateY(-0.2rem);
 }
 
-.singer1 {
-  background: rgba(255, 0, 0, 0.5);
-  transform: translateZ(50px);
+.my-favorite .favorite-music .music-item .desc p {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.5rem;
+  cursor: pointer;
 }
 
-.singer2 {
-  transform: translateZ(-50px) rotateY(180deg);
-  background: rgba(255, 255, 0, 0.5);
+.my-favorite .favorite-music .music-item .desc p:hover {
+  color: #3a6168;
 }
-
-.singer3 {
-  background: rgba(255, 0, 255, 0.5);
-  transform: translateY(-50px) rotateX(90deg);
-}
-
-.singer4 {
-  background: rgba(99, 99, 173, 0.5);
-  transform: translateY(50px) rotateX(-90deg);
-}
-
-.singer5 {
-  transform: translateX(-50px) rotateY(-90deg);
-  background: rgba(100, 206, 206, 0.5);
-}
-
-.singer6 {
-  background: rgb(164, 178, 199, 0.5);
-  transform: translateX(50px) rotateY(90deg);
-}
-
-/* 侧栏播放器结束 */
-

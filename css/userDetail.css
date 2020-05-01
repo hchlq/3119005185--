@@ -1,0 +1,120 @@
+@import "reset.css";
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 头部 */
+.header {
+  position: relative;
+  height: 45rem;
+  width: 100%;
+  background-size: 100% 100%;
+  background-position: top left;
+  background-repeat: no-repeat;
+}
+
+.header-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12rem;
+  margin: 0 auto;
+}
+
+.header-bg .avatar {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  border: 0.2rem solid #ccc;
+  overflow: hidden;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.header-bg .avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.header-bg .name {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.header-bg .follow {
+  display: flex;
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.7rem;
+  color: #fff;
+}
+
+.header-bg .follow .follows {
+  margin-right: 1.5rem;
+}
+
+.header-bg .follow .desc {
+  margin-top: 0.5rem;
+}
+
+/* 头部结束 */
+
+/* 用户喜欢的音乐 */
+.music {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.music .title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.recent-play {
+  margin: 2rem auto;
+}
+
+.recent-play .item {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 2rem;
+}
+
+.recent-play .item .song-name {
+  width: 15%;
+}
+
+.recent-play .item .singer {
+  width: 20%;
+}
+
+.recent-play .item .cm {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recent-play .item a:hover {
+  color: #31c27c;
+}
+
+.recent-play .item:nth-of-type(odd) {
+  background: #fcc;
+}
+
+/* 用户喜欢的一音乐结束 */

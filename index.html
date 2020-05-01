@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>黄程-C.A.T工作室二轮考核</title>
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="icon" href="./favicon.ico">
 </head>
 
 <body>
@@ -14,44 +15,121 @@
         <nav class="h-container clearfix">
             <div class="h-logo left">
                 <h1 class="logo">
-                    <a href="#"><span>网易云音乐</span></a>
+                    <a href="#"><span>HC-MUSIC</span></a>
                 </h1>
             </div>
-            <ul class="h-nav left">
-                <li class='nav-item'><a href="#">发现音乐</a></li>
-                <li class='nav-item'><a href="#">我的音乐</a></li>
-                <li class='nav-item'><a href="#">朋友</a></li>
-                <li class='nav-item'><a href="#">商城</a></li>
-                <li class='nav-item'><a href="#">音乐人</a></li>
-                <li class='nav-item'>
-                    <a href="#">下载客户端</a>
-                </li>
-            </ul>
             <div class="search right">
                 <form class='form' action="">
                     <div class="o-search">
-                        <span class="search-ico"></span>
-                        <input type="text" placeholder='音乐/视频/电台/用户'>
+                        <input type="text" class='text' placeholder='音乐'>
+                        <span class="iconfont">&#xe692;</span>
+                        <ul class="musics">
+                        </ul>
                     </div>
                 </form>
             </div>
+            <ul class="h-nav left ">
+                <li class='nav-item nav-main active'>
+                    <span'>main</span>
+                </li>
+                <li class='nav-item o-favorite'><span>My FavoriteMusic</span></li>
+                <li class='nav-item'><a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html"
+                        target='_blank'>
+                        <My></My> Player
+                    </a></li>
+                <li class='nav-item c-login'>
+                    <span>登录 / 注册</span>
+                </li>
+                <ul class="person-msg">
+                    <li class='getinfo'>
+                        <a class='p-info' href='' target="_blank">获取个人信息</a>
+                    </li>
+                    <li class='logout'>
+                        <span>退出登录</span>
+                    </li>
+                </ul>
+                <!-- 登录框 -->
+                <div class=" form container">
+                    <form action="" class="form-resigter">
+                        <div class="form-container register-container">
+                            <h2>注册</h2>
+                            <div class="validator-phone">
+                                <div class='form-item register-phone'>
+                                    <input type="text" class='data-validator' name='phone' placeholder="手机号">
+                                    <div class="error phone-error"></div>
+                                </div>
+                                <button class="getValidatorCode" type='button'>获取验证码</button>
+                            </div>
+                            <div class="is-show">
+                                <div class='form-item' data-field-container='nickName'>
+                                    <input type="text" data-field class='register-focus' name='phone' placeholder="昵称">
+                                    <div class="error"></div>
+                                </div>
+                                <div class='form-item' data-field-container='phone'>
+                                    <input type="text" data-field class='register-focus' name='phone' placeholder="手机号">
+                                    <div class="error"></div>
+                                </div>
+                                <div class='form-item' data-field-container="pwd">
+                                    <input type="password" data-field name='password' placeholder="密码">
+                                    <div class="error"></div>
+                                </div>
+                                <div class='form-item' data-field-container='validatorCode'>
+                                    <input type="text" data-field class='register-focus' name='phone' placeholder="验证码">
+                                    <div class="error"></div>
+                                </div>
+                                <button class='startRegister' type='button'>注册</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="" class='form-login'>
+                        <div class="form-container login-container">
+                            <h2>登录</h2>
+                            <div class='form-item' data-field-container='phone'>
+                                <input type="text" data-field class='login-focus' name='phone' placeholder="手机号">
+                                <div class="error"></div>
+                            </div>
+                            <div class='form-item' data-field-container="pwd">
+                                <input type="password" data-field name='password' placeholder="密码">
+                                <div class="error"></div>
+                                <div class="show-login-error">账号或密码错误</div>
+                            </div>
+                            <button type='button' class='startLogin'>登录</button>
+                        </div>
+                    </form>
+                    <div class="tip-container">
+                        <div class="tip">
+                            <div class="tip-panel tip-left">
+                                <h2>已有账号?</h2>
+                                <p>请使用您的账号进行登录</p>
+                                <buttom type='button' class="o-login">登录</buttom>
+                            </div>
+                            <div class="tip-panel tip-right">
+                                <h2>没有账号?</h2>
+                                <p>立即注册加入我们吧,一起开启新的音乐旅程!</p>
+                                <button type='button' class="o-register">注册</button>
+                            </div>
+                            <div class="cancle"></div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
         </nav>
     </header>
-    <!--主体部分  -->
-    <div class="main">
-        <!-- 轮播图 -->
-        <div class="main-banner">
-            <div class="wrap-ban clearfix">
-                <div class="banner left">
-                    <a href="#"><img src="./assets/imgs/banner/1.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/2.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/3.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/4.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/5.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/6.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/7.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/8.jpg" alt=""></a>
-                    <a href="#"><img src="./assets/imgs/banner/9.jpg" alt=""></a>
+    <!-- 不同模块切换 -->
+    <div class="change-mode">
+        <!--主体部分  -->
+        <div class="main">
+            <!-- 轮播图 -->
+            <div class="wrap-banner">
+                <div class="banner">
+                    <div class="b-imgs">
+                        <ul class="wrapper-img">
+                        </ul>
+                        <div class="left-arrow arrow">
+                        </div>
+                        <div class="right-arrow arrow">
+                        </div>
+                    </div>
                     <div class="dots">
                         <span class='active'></span>
                         <span></span>
@@ -64,715 +142,719 @@
                         <span></span>
                     </div>
                 </div>
-                <div class="arrows">
-                    <div class="left-arrow arrow">
-                    </div>
-                    <div class="right-arrow arrow">
-                    </div>
-                </div>
             </div>
-        </div>
-        <div class="music mt-5">
-            <!-- 新碟首发 -->
-            <div class="dis-launch mt-5">
-                <div class="d-title">
-                    <h2 class='m-title'>最 近 常 听</h2>
-                </div>
-                <ul class="dis-items">
-                    <li>
-                        <a href="#"><img src="./assets/imgs/new-dis-launch/1.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">岁月神偷</a>
-                            </p>
-                            <p>
-                                <a href="#">周笔畅</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=485960228&img=http://p2.music.126.net/BNqTcNt5HY_0sQdA1ZH-1Q==/18787355185754318.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/2.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">与我无关</a>
-                            </p>
-                            <p>
-                                <a href="#">阿冗</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1413585838&img=http://p2.music.126.net/x-jReyGkM5OTKUEtTqXGoA==/109951164597332931.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/3.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">Dancing With Your Ghost</a>
-                            </p>
-                            <p>
-                                <a href="#">Sasha Sloan</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1374329431&img=http://p1.music.126.net/yKjpbkjawkKABkHy818gOQ==/109951164175679778.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/4.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">都走了 (Live)
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#">杨和苏KeyNG</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1383219381&img=http://p1.music.126.net/Q1HwzbhGO8GB_1QaNciYTQ==/109951164279479954.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/5.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">你的答案
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#">阿冗</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1400256289&img=http://p2.music.126.net/OlX-4S4L0Hdkyy_DQ27zag==/109951164459621658.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/6.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">生来倔强
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#">南征北战NZBZ/</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=467595237&img=http://p1.music.126.net/wS-ah1iIxJVbJL12VUDiSA==/19078725765213958.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/7.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">Come Home
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#">Sad Eye</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=457552130&img=http://p1.music.126.net/kcOBhRHBnVbkVIdzzf6_Yg==/17732923533171854.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/8.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">
-                                    再也没有
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#">永彬Ryan.B / AY楊佬叁</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=480580003&img=http://p2.music.126.net/B7MRU9cieODaInnwzyLwYQ==/18771962022944662.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/9.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">
-                                    可不可以
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#">张紫豪</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=553755659&img=http://p1.music.126.net/WafK2OQfEtqXitdDXJ772Q==/109951163252847249.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                    <li><a href="#"><img src="./assets/imgs/new-dis-launch/10.jpg" alt=""></a>
-                        <div class="desc-wd">
-                            <p>
-                                <a href="#">
-                                    你走以后
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#">季星星</a>
-                            </p>
-                        </div>
-                        <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1403800769&img=http://p2.music.126.net/Ee877Cx5cl02R-zhLwPIQw==/109951164489638176.jpg?param=130y130" target="_blank" class="ico-play"></a>
-                        <i class="dis-modal"></i>
-                    </li>
-                </ul>
-            </div>
-            <!-- 精彩推荐 -->
-            <div class="hot-recommend mt-5">
-                <div>
-                    <h2 class="m-title">精彩推荐</h2>
-                </div>
-                <div class="r-banner">
-                    <div class="imgs">
-                        <a href="">
-                            <img src="./assets/imgs/recommend/1.jpg" alt="">
-                            <img src="./assets/imgs/banner/2.jpg" alt="">
-                        </a>
-                        <a href="">
-                            <img src="./assets/imgs/recommend/3.jpg" alt="">
-                            <img src="./assets/imgs/recommend/4.jpg" alt="">
-                        </a>
-                        <a href="">
-                            <img src="./assets/imgs/recommend/5.jpg" alt="">
-                            <img src="./assets/imgs/recommend/6.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="r-dots">
 
+            <div class="music mt-5">
+                <!-- 最近常听 -->
+                <div class="dis-launch mt-5">
+                    <div class="d-title">
+                        <h2 class='m-title'>最 近 常 听</h2>
                     </div>
-                    <div class="r-arrow">
-                        <div class="left">&lt;</div>
-                        <div class="right">&gt;</div>
+                    <ul class="dis-items recent-cm">
+                        <li>
+                            <a href="#"><img src="./assets/imgs/recent-listen/1.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">岁月神偷</a>
+                                </p>
+                                <p>
+                                    <a href="#">周笔畅</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=485960228"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/2.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">与我无关</a>
+                                </p>
+                                <p>
+                                    <a href="#">阿冗</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1413585838"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/3.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">Dancing With Your Ghost</a>
+                                </p>
+                                <p>
+                                    <a href="#">Sasha Sloan</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1374329431"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/4.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">都走了 (Live)
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="#">杨和苏KeyNG</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1383219381"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/5.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">你的答案
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="#">阿冗</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1400256289"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/6.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">生来倔强
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="#">南征北战NZBZ/</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=467595237"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/7.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">Come Home
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="#">Sad Eye</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=457552130"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/8.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">
+                                        再也没有
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="#">永彬Ryan.B / AY楊佬叁</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=480580003"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/9.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">
+                                        可不可以
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="#">张紫豪</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=553755659"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                        <li><a href="#"><img src="./assets/imgs/recent-listen/10.jpg" alt=""></a>
+                            <div class="desc-wd">
+                                <p>
+                                    <a href="#">
+                                        你走以后
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="#">季星星</a>
+                                </p>
+                            </div>
+                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1403800769"
+                                target="_blank" class="ico-play"></a>
+                            <i class="dis-modal"></i>
+                        </li>
+                    </ul>
+                    <ul class="login-items recent-cm">
+
+                    </ul>
+                </div>
+                <!-- 精彩推荐 -->
+                <div class="hot-recommend mt-5">
+                    <div>
+                        <h2 class="m-title">精彩推荐</h2>
+                    </div>
+                    <div class="r-banner">
+                        <div class="imgs">
+                            <a href="">
+                                <img src="./assets/imgs/recommend/1.jpg" alt="">
+                                <img src="./assets/imgs/recommend/2.jpg" alt="">
+                            </a>
+                            <a href="">
+                                <img src="./assets/imgs/recommend/3.jpg" alt="">
+                                <img src="./assets/imgs/recommend/4.jpg" alt="">
+                            </a>
+                            <a href="">
+                                <img src="./assets/imgs/recommend/5.jpg" alt="">
+                                <img src="./assets/imgs/recommend/6.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="r-dots">
+
+                        </div>
+                        <div class="r-arrow">
+                            <div class="arrow-left"></div>
+                            <div class="arrow-right"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- 排行榜 -->
-            <div class="rank mt-5">
-                <div>
-                    <h2 class="m-title">排行榜</h2>
+                <!-- 排行榜 -->
+                <div class="rank mt-5">
+                    <div>
+                        <h2 class="m-title">排行榜</h2>
+                    </div>
+                    <div class="rank-wrapper init">
+                        <ul class="rank-items">
+                            <li class="item">
+                                <div class="inner">
+                                    <div class="bg"></div>
+                                    <div class="detail">
+                                        <h2>巅 峰 榜</h2>
+                                        <h2 class='sort-song'>热歌</h2>
+                                        <div class="line">
+                                            <i class='inner-line'></i>
+                                            <i class='play'></i>
+                                        </div>
+                                        <div class="rank-song">
+                                            <div class="song-item">
+                                                <a href="file:///D:/二轮考核/C.A.T/music.html?id=1378461989"
+                                                    target="_blank">
+                                                    <p>
+                                                        1 <span>与你无关</span>
+                                                        <p>南洋记乐队</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/二轮考核/C.A.T/music.html?id=527601001" target="_blank">
+                                                    <p>
+                                                        2 <span>少年</span>
+                                                        <p>邹玲儿</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/二轮考核/C.A.T/music.html?id=1331819951"
+                                                    target="_blank">
+                                                    <p>
+                                                        3 <span>像鱼</span>
+                                                        <p>王贰浪</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="left">热歌</div>
+                                        <div class="close"></div>
+                                    </div>
+                                    <div class="btn">展示更多</div>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="inner">
+                                    <div class="bg"></div>
+                                    <div class="detail">
+                                        <h2>巅 峰 榜</h2>
+                                        <h2 class='sort-song'>新歌</h2>
+                                        <div class="line">
+                                            <i class='inner-line'></i>
+                                            <i class='play'></i>
+                                        </div>
+                                        <div class="rank-song">
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=534542079"
+                                                    target="_blank">
+                                                    <p>
+                                                        1 <span>侧脸</span>
+                                                        <p>于果</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=553755659"
+                                                    target='_blank'>
+                                                    <p>
+                                                        2 <span>可不可以</span>
+                                                        <p>张梓豪</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1440315822"
+                                                    target="_blank">
+                                                    <p>
+                                                        3 <span>再见一面</span>
+                                                        <p>于文文</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="left">新歌</div>
+                                        <div class="close"></div>
+                                    </div>
+                                    <div class="btn">展示更多</div>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="inner">
+                                    <div class="bg"></div>
+                                    <div class="detail">
+                                        <h2>巅 峰 榜</h2>
+                                        <h2 class='sort-song'>流行指数</h2>
+                                        <div class="line">
+                                            <i class='inner-line'></i>
+                                            <i class='play'></i>
+                                        </div>
+                                        <div class="rank-song">
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1436709403"
+                                                    target="_blank">
+                                                    <p>
+                                                        1 <span>夏天的风</span>
+                                                        <p>Uu</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1441576108"
+                                                    target="_blank">
+                                                    <p>
+                                                        2 <span>点歌的人</span>
+                                                        <p>海来阿木</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1403215687"
+                                                    target="_blank">
+                                                    <p>
+                                                        3 <span>想见你想见你想见你(Live)</span>
+                                                        <p>段艺璇/段小薇/刘雨昕</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="left">流行指数</div>
+                                        <div class="close"></div>
+                                    </div>
+                                    <div class="btn">展示更多</div>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="inner">
+                                    <div class="bg"></div>
+                                    <div class="detail">
+                                        <h2>巅 峰 榜</h2>
+                                        <h2 class='sort-song'>欧美</h2>
+                                        <div class="line">
+                                            <i class='inner-line'></i>
+                                            <i class='play'></i>
+                                        </div>
+                                        <div class="rank-song">
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1436753138"
+                                                    target="_blank">
+                                                    <p>
+                                                        1 <span>Take Yourself Home</span>
+                                                        <p>Troye Sivan</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1431946742"
+                                                    target="_blank">
+                                                    <p>
+                                                        2 <span>Heading Home</span>
+                                                        <p>Alan Walker/Ruben</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1440410293"
+                                                    target="_blank">
+                                                    <p>
+                                                        3 <span>You Know I'll Go Get</span>
+                                                        <p>DJ Haning/Rizky Ayu</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="left">欧美</div>
+                                        <div class="close"></div>
+                                    </div>
+                                    <div class="btn">展示更多</div>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="inner">
+                                    <div class="bg"></div>
+                                    <div class="detail">
+                                        <h2>巅 峰 榜</h2>
+                                        <h2 class='sort-song'>韩国</h2>
+                                        <div class="line">
+                                            <i class='inner-line'></i>
+                                            <i class='play'></i>
+                                        </div>
+                                        <div class="rank-song">
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1296067209"
+                                                    target="_blank">
+                                                    <p>
+                                                        1 <span>time</span>
+                                                        <p>Hold</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1395035020"
+                                                    target="_blank">
+                                                    <p>
+                                                        2 <span>Remember</span>
+                                                        <p>Ikson</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="song-item">
+                                                <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=1436264336"
+                                                    target="_blank">
+                                                    <p>
+                                                        3 <span>舞い落ちる花びら（Fallin' Flower）</span>
+                                                        <p>SEVENTEEN (세븐틴)</p>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="left">韩国</div>
+                                        <div class="close"></div>
+                                    </div>
+                                    <div class="btn">展示更多</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="rank-wrapper init">
-                    <ul class="rank-items">
-                        <li class="item">
-                            <div class="inner">
-                                <div class="bg"></div>
-                                <div class="detail">
-                                    <h2>巅 峰 榜</h2>
-                                    <h2 class='sort-song'>热歌</h2>
-                                    <div class="line">
-                                        <i class='inner-line'></i>
-                                        <i class='play'></i>
-                                    </div>
-                                    <div class="rank-song">
-                                        <div class="song-item">
-                                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music/music.html?id=1378461989&img=http://p2.music.126.net/q60xyHzLOb2WHVf-gm2dCQ==/109951164219913433.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    1 <span>与你无关</span>
-                                                    <p>南洋记乐队</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music/music.html?id=527601001&img=http://p2.music.126.net/SCSx49IzYiQ0hSTqzw5nXg==/109951163097291709.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    2 <span>少年</span>
-                                                    <p>邹玲儿</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music/music.html?id=1331819951&img=http://p2.music.126.net/ejEPGN6ulPSgCBXGq7dgqw==/109951163720047382.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    3 <span>像鱼</span>
-                                                    <p>王贰浪</p>
-                                                </p>
-                                            </a>
-                                        </div>
+                <!-- 推荐新音乐 -->
+                <div class="lastest-recommend mt-5">
+                    <div>
+                        <h2 class="m-title">推荐音乐</h2>
+                    </div>
+                    <div class="sort-nav">
+                        <ul class="nav-items clearfix">
+                            <li><span class='wd-active nd'>内地</span></li>
+                            <li><span class='hy'>华语</span></li>
+                            <li><span class='gt'>港台</span></li>
+                            <li><span class='hg'>韩国</span></li>
+                            <li><span class='rb'>日本</span></li>
+                            <li><span class='qt'>其他</span></li>
+                        </ul>
+                    </div>
+                    <div class="wrap-lastest-item">
+                        <ul class='lastest-items'>
+                            <!-- <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/1.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">易烊千玺2019“玊尔”演唱会纪录片《独一无二的你》</a>
+                                        </p>
+                                        <p><a href="#">易烊千玺</a></p>
+                                        <a href='#' class='play'></a>
                                     </div>
                                 </div>
-                                <div class="desc">
-                                    <div class="left">热歌</div>
-                                    <div class="close"></div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/2.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">《时间海》视觉版MV</a>
+                                        </p>
+                                        <p><a href="#">吴亦凡</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
                                 </div>
-                                <div class="btn">展示更多</div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/3.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">LALALILALA</a>
+                                        </p>
+                                        <p><a href="#">APRIL</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/4.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">呼吸有害 (《飞虎之雷霆极战》主题曲)</a>
+                                        </p>
+                                        <p><a href="#">莫文蔚</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/5.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">NOT BY THE MOON</a>
+                                        </p>
+                                        <p><a href="#">GOT7</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/6.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">只是不够爱 (《飞虎之雷霆极战》主题曲)</a>
+                                        </p>
+                                        <p><a href="#">莫文蔚</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/7.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">Black And White</a>
+                                        </p>
+                                        <p><a href="#">Niall Horan</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/8.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">by your side (YouTube Ver.)</a>
+                                        </p>
+                                        <p><a href="#">V6</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/9.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">遥不可及的梦 (《长安少年行》电视剧片尾曲)</a>
+                                        </p>
+                                        <p><a href="#">吴希泽</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li>
+    
+                            <li class='mv-item'>
+                                <div class="picbox">
+                                    <div class="show"><img src="./assets/imgs/mv/10.jpg" alt=""></div>
+                                    <div class="hide">
+                                        <p>
+                                            <a href="#">Can’t Get Enough (YouTube Ver.)</a>
+                                        </p>
+                                        <p><a href="#">V6</a></p>
+                                        <a href='#' class='play'></a>
+                                    </div>
+                                </div>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- 歌星介绍 -->
+                <div class="show-singer mt-5">
+                    <div>
+                        <h2 class="m-title">歌星介绍</h2>
+                    </div>
+                    <ul class="wrap-box">
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/1.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                薛之谦经过十年的沉淀和潜伏所有作品才慢慢被接受并成为潮流，写歌不是为了名也不是为了利，只是因为单纯的喜欢，他愿意一直免费唱歌给别人听！
                             </div>
                         </li>
-                        <li class="item">
-                            <div class="inner">
-                                <div class="bg"></div>
-                                <div class="detail">
-                                    <h2>巅 峰 榜</h2>
-                                    <h2 class='sort-song'>新歌</h2>
-                                    <div class="line">
-                                        <i class='inner-line'></i>
-                                        <i class='play'></i>
-                                    </div>
-                                    <div class="rank-song">
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=534542079&img=http://p2.music.126.net/FWR6RWtqhljoKR0QyRhQzQ==/109951163127272432.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    1 <span>侧脸</span>
-                                                    <p>于果</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=553755659&img=http://p1.music.126.net/WafK2OQfEtqXitdDXJ772Q==/109951163252847249.jpg?param=130y130" target='_blank'>
-                                                <p>
-                                                    2 <span>可不可以</span>
-                                                    <p>张梓豪</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1440315822&img=http://p2.music.126.net/38bwNDeNZf2092gChDo6SQ==/109951164907115185.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    3 <span>再见一面</span>
-                                                    <p>于文文</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="desc">
-                                    <div class="left">新歌</div>
-                                    <div class="close"></div>
-                                </div>
-                                <div class="btn">展示更多</div>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/2.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                毛不易作为一个最新撅起的创作歌手能够上榜也足够证明他的实力，他没有炫丽的嗓音，也没有华丽的歌词；有的只是对生活的轻描淡写，对命运的举杯消愁，他用自己的方式唱出人生姿态，他是不易巨星
                             </div>
                         </li>
-                        <li class="item">
-                            <div class="inner">
-                                <div class="bg"></div>
-                                <div class="detail">
-                                    <h2>巅 峰 榜</h2>
-                                    <h2 class='sort-song'>流行指数</h2>
-                                    <div class="line">
-                                        <i class='inner-line'></i>
-                                        <i class='play'></i>
-                                    </div>
-                                    <div class="rank-song">
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1436709403&img=http://p2.music.126.net/rFUKVdOjqxgwAT6Zi6qv7A==/109951164906689206.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    1 <span>夏天的风</span>
-                                                    <p>Uu</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1441576108&img=http://p1.music.126.net/YhsyU846atRyem6Q4mY03w==/109951164753648287.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    2 <span>点歌的人</span>
-                                                    <p>海来阿木</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1403215687&img=http://p1.music.126.net/8MjQbJQtJRV81d1dNfiH6A==/109951164485238047.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    3 <span>想见你想见你想见你(Live)</span>
-                                                    <p>段艺璇/段小薇/刘雨昕</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="desc">
-                                    <div class="left">流行指数</div>
-                                    <div class="close"></div>
-                                </div>
-                                <div class="btn">展示更多</div>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/3.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                庄心妍一首好可惜唱出了多少人对感情的遗憾，她的一万个舍不得让多少人对爱情充满了眷恋，最美的情话不是我爱你，而是对你的点点滴滴的不舍和怀恋。
                             </div>
                         </li>
-                        <li class="item">
-                            <div class="inner">
-                                <div class="bg"></div>
-                                <div class="detail">
-                                    <h2>巅 峰 榜</h2>
-                                    <h2 class='sort-song'>欧美</h2>
-                                    <div class="line">
-                                        <i class='inner-line'></i>
-                                        <i class='play'></i>
-                                    </div>
-                                    <div class="rank-song">
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1436753138&img=http://p1.music.126.net/6nuFSMK3UMG5nLsreYX1Vg==/109951164862495860.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    1 <span>Take Yourself Home</span>
-                                                    <p>Troye Sivan</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1431946742&img=http://p2.music.126.net/RHoQxyCQ9cE76v9bXWOTTw==/109951164815550387.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    2 <span>Heading Home</span>
-                                                    <p>Alan Walker/Ruben</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1440410293&img=http://p2.music.126.net/vdz28L_WlGF0tjQqQ6AT9Q==/109951164903714853.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    3 <span>You Know I'll Go Get</span>
-                                                    <p>DJ Haning/Rizky Ayu</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="desc">
-                                    <div class="left">欧美</div>
-                                    <div class="close"></div>
-                                </div>
-                                <div class="btn">展示更多</div>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/4.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                李荣浩歌声里的沧桑让人回味无穷，一首模特唱尽生活百态，一曲李白让人不禁感慨；他对音乐的执着和热忱全都倾注在词曲之中，任人细细品味！
                             </div>
                         </li>
-                        <li class="item">
-                            <div class="inner">
-                                <div class="bg"></div>
-                                <div class="detail">
-                                    <h2>巅 峰 榜</h2>
-                                    <h2 class='sort-song'>韩国</h2>
-                                    <div class="line">
-                                        <i class='inner-line'></i>
-                                        <i class='play'></i>
-                                    </div>
-                                    <div class="rank-song">
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1296067209&img=http://p2.music.126.net/_NRbazI3MmoXT5mY8BvK1g==/109951164914502376.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    1 <span>time</span>
-                                                    <p>Hold</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1395035020&img=http://p1.music.126.net/aH0W98R2M-uel951bb2Bfw==/109951163835984832.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    2 <span>Remember</span>
-                                                    <p>Ikson</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                        <div class="song-item">
-                                            <a href="file:///D:/二轮考核/C.A.T/music/music.html?id=1436264336&img=http://p1.music.126.net/l-tY-5u9UU1bVXKMPXxYhg==/109951164858594404.jpg?param=130y130" target="_blank">
-                                                <p>
-                                                    3 <span>舞い落ちる花びら（Fallin' Flower）</span>
-                                                    <p>SEVENTEEN (세븐틴)</p>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="desc">
-                                    <div class="left">韩国</div>
-                                    <div class="close"></div>
-                                </div>
-                                <div class="btn">展示更多</div>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/5.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                杨坤独特的唱歌技巧成为了众多歌手中的一股泥石流，如果只是听声音，谁也想不到拥有着如此嗓音的人竟然是一位壮汉，一首无所谓惊艳全场！
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/6.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                胡彦斌，一曲月光荡气回肠，他对音乐独特的见解和认识在乐坛中始终占有一席之地，虽然他很少出现在镜头面前，更多的是注重在自己的创作上面，但是她的歌曲很受大众喜爱！
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/7.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                汪苏泷，有多少人的青春记忆是在他的歌声中度过的，这么多年来，他一直没有改变，还是原来的声音和回忆！
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/8.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                于文文是一名音乐才女，直爽的性子和深情的歌声都非常的令人喜爱；分手应该体面的潇洒成为了多少人向往的画面，她的出现让情歌界多了一份干脆！
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/9.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                陈粒的歌曾在网络上传遍各大平台，不仅有人用她的作品参加比赛，还有不少明星艺人登台翻唱，独特空灵的嗓音让她的风格被大众认可，成为了一种时尚。
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/10.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                周杰伦（Jay Chou），1979年1月18日出生于台湾省新北市，祖籍福建省泉州市永春县，中国台湾流行乐男歌手、原创音乐人、演员、导演等，毕业于...
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/11.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                林俊杰（JJ
+                                Lin），1981年3月27日出生于新加坡，祖籍中国福建省厦门市同安区，华语流行乐男歌手、词曲创作人、音乐制作人、潮牌主理人。2003年发行首张创作专...
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/12.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                陈奕迅（Eason Chan），1974年7月27日出生于中国香港，祖籍广东省东莞市，中国香港流行乐男歌手、演员，毕业于英国金斯顿大学。
+                                1995年参加第14届新秀歌唱大赛并获得冠军，同年正式出道...</div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/13.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                罗志祥（Show Lo），1979年7月30日出生于中国台湾省基隆市，华语流行男歌手、主持人、舞者、演员。
+                                1995年出道，2003年罗志祥推出首张...
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/14.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                张杰（Jason Zhang），1982年12月20日出生于四川省成都市，中国内地流行男歌手，中国文艺志愿者协会理事。2004年参加歌唱类选秀《我型我秀》..
+                            </div>
+                        </li>
+                        <li class="box">
+                            <div class='img'>
+                                <img src="./assets/imgs/showSinger/15.jpg" alt="">
+                            </div>
+                            <div class="box-bg">
+                                鹿晗（Lu Han），1990年4月20日出生于北京市海淀区，中国内地影视男演员、歌手。2008年，赴韩国留学期间...
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <!-- MV -->
-            <div class="mv mt-5">
-                <div>
-                    <h2 class="m-title">MV</h2>
-                </div>
-                <div class="sort-nav">
-                    <ul class="nav-items clearfix">
-                        <li class='tri-active active'><a href="#">内地</a></li>
-                        <li><a href="#">港台</a></li>
-                        <li><a href="#">欧美</a></li>
-                        <li><a href="#">韩国</a></li>
-                        <li><a href="#">日本</a></li>
-                        <li><a href="#">其他</a></li>
-                    </ul>
-                </div>
-                <div class="wrap-mv">
-                    <ul>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/1.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">易烊千玺2019“玊尔”演唱会纪录片《独一无二的你》</a>
-                                    </p>
-                                    <p><a href="#">易烊千玺</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>10.8万</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/2.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">《时间海》视觉版MV</a>
-                                    </p>
-                                    <p><a href="#">吴亦凡</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>13万</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/3.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">LALALILALA</a>
-                                    </p>
-                                    <p><a href="#">APRIL</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>4756</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/4.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">呼吸有害 (《飞虎之雷霆极战》主题曲)</a>
-                                    </p>
-                                    <p><a href="#">莫文蔚</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>8.9万</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/5.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">NOT BY THE MOON</a>
-                                    </p>
-                                    <p><a href="#">GOT7</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>11.1万</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/6.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">只是不够爱 (《飞虎之雷霆极战》主题曲)</a>
-                                    </p>
-                                    <p><a href="#">莫文蔚</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>10.5万</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/7.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">Black And White</a>
-                                    </p>
-                                    <p><a href="#">Niall Horan</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>1103</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/8.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">by your side (YouTube Ver.)</a>
-                                    </p>
-                                    <p><a href="#">V6</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>1868</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/9.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">遥不可及的梦 (《长安少年行》电视剧片尾曲)</a>
-                                    </p>
-                                    <p><a href="#">吴希泽</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>3507</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <li class='mv-item'>
-                            <div class="picbox">
-                                <div class="show"><img src="./assets/imgs/mv/10.jpg" alt=""></div>
-                                <div class="hide">
-                                    <p>
-                                        <a href="#">Can’t Get Enough (YouTube Ver.)</a>
-                                    </p>
-                                    <p><a href="#">V6</a></p>
-                                    <div><span class='iconfont'>&#xe617;</span><span>3010</span></div>
-                                    <a href='#' class='play'></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+        </div>
+        <!-- 我喜欢的音乐 -->
+        <div class="my-favorite">
+            <div>
+                <h2 class="m-title">
+                    My Favorite
+                </h2>
             </div>
-            <!-- 歌星介绍 -->
-            <div class="show-singer mt-5">
-                <div>
-                    <h2 class="m-title">歌星介绍</h2>
-                </div>
-                <ul class="wrap-box">
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/1.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            薛之谦经过十年的沉淀和潜伏所有作品才慢慢被接受并成为潮流，写歌不是为了名也不是为了利，只是因为单纯的喜欢，他愿意一直免费唱歌给别人听！
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/2.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            毛不易作为一个最新撅起的创作歌手能够上榜也足够证明他的实力，他没有炫丽的嗓音，也没有华丽的歌词；有的只是对生活的轻描淡写，对命运的举杯消愁，他用自己的方式唱出人生姿态，他是不易巨星
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/3.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            庄心妍一首好可惜唱出了多少人对感情的遗憾，她的一万个舍不得让多少人对爱情充满了眷恋，最美的情话不是我爱你，而是对你的点点滴滴的不舍和怀恋。
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/4.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            李荣浩歌声里的沧桑让人回味无穷，一首模特唱尽生活百态，一曲李白让人不禁感慨；他对音乐的执着和热忱全都倾注在词曲之中，任人细细品味！
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/5.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            杨坤独特的唱歌技巧成为了众多歌手中的一股泥石流，如果只是听声音，谁也想不到拥有着如此嗓音的人竟然是一位壮汉，一首无所谓惊艳全场！
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/6.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            胡彦斌，一曲月光荡气回肠，他对音乐独特的见解和认识在乐坛中始终占有一席之地，虽然他很少出现在镜头面前，更多的是注重在自己的创作上面，但是她的歌曲很受大众喜爱！
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/7.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            汪苏泷，有多少人的青春记忆是在他的歌声中度过的，这么多年来，他一直没有改变，还是原来的声音和回忆！
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/8.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            于文文是一名音乐才女，直爽的性子和深情的歌声都非常的令人喜爱；分手应该体面的潇洒成为了多少人向往的画面，她的出现让情歌界多了一份干脆！
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/9.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            陈粒的歌曾在网络上传遍各大平台，不仅有人用她的作品参加比赛，还有不少明星艺人登台翻唱，独特空灵的嗓音让她的风格被大众认可，成为了一种时尚。
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/10.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            周杰伦（Jay Chou），1979年1月18日出生于台湾省新北市，祖籍福建省泉州市永春县，中国台湾流行乐男歌手、原创音乐人、演员、导演等，毕业于...
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/11.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            林俊杰（JJ
-                            Lin），1981年3月27日出生于新加坡，祖籍中国福建省厦门市同安区，华语流行乐男歌手、词曲创作人、音乐制作人、潮牌主理人。2003年发行首张创作专...
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/12.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            陈奕迅（Eason Chan），1974年7月27日出生于中国香港，祖籍广东省东莞市，中国香港流行乐男歌手、演员，毕业于英国金斯顿大学。
-                            1995年参加第14届新秀歌唱大赛并获得冠军，同年正式出道...</div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/13.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            罗志祥（Show Lo），1979年7月30日出生于中国台湾省基隆市，华语流行男歌手、主持人、舞者、演员。
-                            1995年出道，2003年罗志祥推出首张...
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/14.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            张杰（Jason Zhang），1982年12月20日出生于四川省成都市，中国内地流行男歌手，中国文艺志愿者协会理事。2004年参加歌唱类选秀《我型我秀》..
-                        </div>
-                    </li>
-                    <li class="box">
-                        <div class='img'>
-                            <img src="./assets/imgs/showSinger/15.jpg" alt="">
-                        </div>
-                        <div class="box-bg">
-                            鹿晗（Lu Han），1990年4月20日出生于北京市海淀区，中国内地影视男演员、歌手。2008年，赴韩国留学期间...
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <ul class="favorite-music">
+            </ul>
         </div>
     </div>
-    <!-- 侧栏播放器 -->
-    <div class="cube-player">
-        <div class="cube-container">
-            <div class="singer1 singer">前</div>
-            <div class="singer2 singer">后</div>
-            <div class="singer3 singer">上</div>
-            <div class="singer4 singer">下</div>
-            <div class="singer5 singer">左</div>
-            <div class="singer6 singer">右</div>
-        </div>
-        <div class="wrap">
-            <button class='prev control'>prev</button>
-            <button class="start control">start</button>
-            <button class='next control'>next</button>
-        </div>
-    </div>
-    <audio src="./music/song_1.mp3" class='audio'></audio>
-    <script src='./js/animate.js'></script>
     <script src='./js/index.js'></script>
 </body>
 

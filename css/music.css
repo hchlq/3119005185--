@@ -1,0 +1,399 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.3rem;
+  background: #eff5f9;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.p-container {
+  width: 28rem;
+  margin: 0 auto;
+}
+
+.device {
+  height: 100%;
+  width: 100%;
+  color: rgba(225, 225, 225, 0.8);
+}
+
+.device .main {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 84vh;
+}
+
+.device .main .blur-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 600rem;
+  background-position: top center;
+  z-index: 2;
+  filter: blur(10rem);
+}
+
+.d-bottom {
+  display: flex;
+  height: 16%;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.device .left-songs {
+  position: relative;
+  z-index: 10;
+  width: 28%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.device .left-songs li {
+  width: 100%;
+  height: 5rem;
+  line-height: 5rem;
+  font-size: 1.8rem;
+  padding: 0.5rem 0;
+  text-align: center;
+  color: #000;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.device .left-songs li:hover {
+  background: #008c8c;
+  color: #fff;
+}
+
+.right-songs {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  color: #000;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* 侧栏旋转正方体 */
+.cube-player {
+  position: absolute;
+  top: 20rem;
+  width: 20rem;
+  height: 20rem;
+  perspective: 80rem;
+}
+
+.a-left {
+  left: 1rem;
+}
+
+.a-right {
+  right: 1rem;
+}
+
+.cube-player .control {
+  margin-right: 2rem;
+  width: 6rem;
+  height: 3rem;
+  background: rgba(100, 206, 206, 0.5);
+}
+
+.cube-player div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 10rem;
+  height: 10rem;
+  text-align: center;
+  line-height: 10rem;
+  font-size: 3rem;
+  transition: all 5s;
+  backface-visibility: visible;
+}
+
+.cube-player .wrap {
+  display: flex;
+  position: absolute;
+  top: 21rem;
+  left: 0;
+  width: auto;
+  height: auto;
+  transition: none;
+}
+
+.cube-container {
+  transform-style: preserve-3d;
+  animation: loop 5s linear infinite paused;
+}
+
+@keyframes loop {
+  from {
+    transform: rotateX(30deg) rotateY(30deg);
+  }
+
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+.singer1 {
+  background: rgba(255, 0, 0, 0.5);
+  transform: translateZ(50px);
+}
+
+.singer2 {
+  transform: translateZ(-50px) rotateY(180deg);
+  background: rgba(255, 255, 0, 0.5);
+}
+
+.singer3 {
+  background: rgba(255, 0, 255, 0.5);
+  transform: translateY(-50px) rotateX(90deg);
+}
+
+.singer4 {
+  background: rgba(99, 99, 173, 0.5);
+  transform: translateY(50px) rotateX(-90deg);
+}
+
+.singer5 {
+  transform: translateX(-50px) rotateY(-90deg);
+  background: rgba(100, 206, 206, 0.5);
+}
+
+.singer6 {
+  background: rgb(164, 178, 199, 0.5);
+  transform: translateX(50px) rotateY(90deg);
+}
+
+/* 侧栏正方体结束 */
+
+.right-songs .wrapper-lyrics {
+  width: 100%;
+  height: 30rem;
+  overflow: hidden;
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.right-songs .lyrics p {
+  height: 3rem;
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 auto;
+  line-height: 3rem;
+  color: #eee;
+  font-size: 1.7rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.device .album {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+@keyframes albumRotate {
+  from {
+    transform: rotate3d(0, 0, 0, 0);
+  }
+  to {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+.device .album .p-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem 2rem 0 0;
+  animation: albumRotate 15s linear infinite paused;
+}
+
+.device .prograss {
+  position: relative;
+  width: 45rem;
+  height: 1rem;
+  border-radius: 1rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+.device .prograss .prograss-move {
+  height: 100%;
+  width: 0;
+  background: #646464;
+  border-radius: 1rem;
+}
+
+.device .prograss .head-move {
+  position: absolute;
+  top: -3px;
+  left: -6px;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.device .prograss .song-desc {
+  position: absolute;
+  top: -2.5rem;
+  left: 0;
+  width: 36rem;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.device .prograss .time {
+  position: absolute;
+  top: -2.2rem;
+  right: 0;
+  color: #ccc;
+}
+
+.device .prograss .song-desc span:hover {
+  color: #fff;
+}
+
+.device .player {
+  display: flex;
+  height: 10rem;
+  width: 28rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.device .player .cm-bg {
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(0, 140, 140, 0.8);
+  cursor: pointer;
+}
+
+.device .player .prev,
+.device .player .next {
+  width: 6rem;
+  height: 6rem;
+  line-height: 7rem;
+}
+
+.device .player .prev i,
+.device .player .next i {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  background: url("../assets/imgs/player.png") no-repeat;
+}
+
+.device .player .run-pause {
+  position: relative;
+  width: 9rem;
+  height: 9rem;
+  line-height: 9rem;
+}
+
+.device .player .run-pause i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rem;
+  height: 3rem;
+  background: url("../assets/imgs/player.png") no-repeat;
+  background-position: 9px 0px;
+}
+
+.device .player .prev i {
+  background-position: 0px -30px;
+}
+
+.device .player .next i {
+  background-position: 0px -52px;
+}
+
+.device .player a:hover {
+  background: rgba(0, 140, 140);
+}
+
+.controls {
+  width: 30rem;
+  height: 5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.controls .volume {
+  width: 20rem;
+}
+
+.controls .volume .volume-move {
+  left: 1.5rem;
+}
+
+.controls .volume .volume-prograss {
+  width: 2.1rem;
+  background: #646464;
+}
+
+.controls .play-mode,
+.controls .volume-ico {
+  width: 5rem;
+  height: 5rem;
+  text-align: center;
+  line-height: 7rem;
+}
+
+.controls .play-mode i,
+.controls .volume-ico i {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  background: url("../assets/imgs/player.png") no-repeat;
+  background-position-y: -20.2rem;
+}
+
+.controls .volume-ico {
+  text-align: right;
+  margin-right: 4px;
+}
+
+/* -180px */
+.controls .volume-ico i {
+  height: 25px;
+  background-position-y: -144px;
+}
