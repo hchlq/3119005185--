@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HC player</title>
-    <link rel="stylesheet" href="./css/music.css">
-    <link rel="icon" href="./favicon.ico">
+    <link rel="stylesheet" href="../css/music.css">
+    <link rel="icon" href="../favicon.ico">
 </head>
 
 <body>
@@ -18,6 +18,9 @@
             <div class="right-songs">
                 <div class="album">
                     <img src="" class='p-img' alt="">
+                    <div class="swiper">
+                        <img src="../assets/imgs/cd_tou.png" alt="">
+                    </div>
                 </div>
                 <div class="wrapper-lyrics">
                     <div class="lyrics">
@@ -50,7 +53,7 @@
         <div class="d-bottom">
             <!-- 播放 暂停等 -->
             <div class="player">
-                <div class="prev cm-bg" title='上一首'> 
+                <div class="prev cm-bg" title='上一首'>
                     <i></i>
                 </div>
                 <div class="run-pause cm-bg" title='播放'>
@@ -77,6 +80,9 @@
                 <div class="play-mode">
                     <i class='mode'></i>
                 </div>
+                <div class="comment" title='评论'>
+                    <i class="c-ico"></i>
+                </div>
                 <div class="volume-ico">
                     <i class='volume-mode'></i>
                 </div>
@@ -87,9 +93,29 @@
             </div>
         </div>
     </div>
+    <!-- 评论 -->
+    <div class="hot-comment">
+        <div class="o-comment">
+        </div>
+        <div class='input'>
+            <input class='c-input' type="text" placeholder="请发表你的评论">
+            <button type='button' class='back'>回到播放器页面</button>
+        </div>
+    </div>
+    <div class="loading">
+        <div class="monster">
+            <div class="eye">
+                <div class="eyeBall"></div>
+            </div>
+            <div class="mouth"></div>
+        </div>
+        <div class="msg">
+            <h2>正在努力加载中...</h2>
+        </div>
+    </div>
     <audio class='audio'></audio>
-    <script src="./js/jQuery.js"></script>
-    <script src='./js/music.js'></script>
+    <script src="../js/jQuery.js"></script>
+    <script src='../js/music.js'></script>
     </script>
 </body>
 

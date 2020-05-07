@@ -61,6 +61,7 @@ body {
   font-size: 1.6rem;
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  
 }
 
 /* 头部 */
@@ -71,7 +72,6 @@ body {
   left: 0;
   width: 100%;
   z-index: 10;
-  background: #3a6168;
 }
 
 .header .h-container {
@@ -142,21 +142,21 @@ body {
 }
 
 .h-container .h-nav .nav-item:not(.success-login):hover {
-  background: #b33771;
+  background: #e67e22;
   color: #fff;
 }
 
 .header .h-container .h-nav .nav-item.active {
-  background: #b33771 !important;
+  background: #e67e22 !important;
   color: #fff !important;
 }
 
 .h-container .h-nav .person-msg {
   position: absolute;
   top: 7rem;
-  left: 32rem;
-  width: 10rem;
-  background: #fff;
+  left: 30rem;
+  width: 15rem;
+  background: #008c8c;
   z-index: 10;
   cursor: pointer;
   color: #333;
@@ -476,7 +476,8 @@ body {
   font-size: 1.8rem;
 }
 
-.musics {
+.musics,
+.cur-hot-wd {
   position: absolute;
   top: 3.6rem;
   left: 0;
@@ -485,10 +486,11 @@ body {
   margin-top: -1px;
   border-radius: 0 0 1rem 1rem;
   z-index: 10;
-  overflow: hidden;
+  overflow: auto;
   background: #fff;
   padding: 0.5rem;
   display: none;
+  height: auto;
 }
 
 .musics li {
@@ -530,6 +532,31 @@ body {
   color: #fff;
 }
 
+.cur-hot-wd {
+  color: #333;
+}
+
+.cur-hot-wd .h-title {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.cur-hot-wd li a {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  font-size: 2.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cur-hot-wd li:hover {
+  background: #008c8c;
+  color: #fff;
+}
+
 /* 头部结束 */
 
 /* 不同模块切换 */
@@ -537,13 +564,11 @@ body {
 .change-mode {
   position: relative;
   margin-top: 7rem;
+  z-index: 2;
 }
 
 /*主体部分  */
 .main {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   transition: all 0.6s;
   margin: 0 auto;
@@ -561,13 +586,14 @@ body {
 }
 
 .banner::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  filter: blur(13rem);
+  -webkit-filter: blur(30rem);
+  filter: blur(30rem);
 }
 
 .banner .b-imgs {
@@ -588,7 +614,7 @@ body {
 }
 
 .banner:hover .arrow {
-  display: block; 
+  display: block;
 }
 
 .banner .left-arrow {
@@ -679,7 +705,10 @@ body {
 
 .banner .dots {
   position: relative;
-  width: 32rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 35rem;
   height: 3rem;
   margin: 0 auto;
   cursor: pointer;
@@ -710,17 +739,17 @@ body {
 
 /* 最近常听 */
 
-.music .dis-launch {
+.music .recent-listen {
   width: 100%;
   padding: 0.5rem;
 }
 
-.music .dis-launch .d-title {
+.music .recent-listen .d-title {
   width: 100%;
   text-align: center;
 }
 
-.music .dis-launch .recent-cm {
+.music .recent-listen .recent-cm {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -728,32 +757,41 @@ body {
   width: 100%;
 }
 
-.music .dis-launch .isHide {
+
+.recent-page {
+  visibility: hidden;
+}
+
+.music .recent-listen .isHide {
   display: none;
 }
 
-.music .dis-launch .recent-cm li {
+.music .recent-listen .recent-cm li {
   position: relative;
   width: 20rem;
-  height: 23rem;
+  height: 20rem;
   margin-top: 1rem;
+  -webkit-transition: all 0.3s;
+  border-radius: 50%;
   transition: all 0.3s;
   cursor: pointer;
   overflow: hidden;
+  text-align: center;
+  border: 0.5rem solid #ccc;
 }
 
-.music .dis-launch .recent-cm li:hover {
+.music .recent-listen .recent-cm li:hover {
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
-  transform: translate3d(0, -2px, 0);
+  transform: translate3d(0, -2px, 0) rotate(360deg);
 }
 
-.music .dis-launch .recent-cm li img {
+.music .recent-listen .recent-cm li img {
   width: 100%;
   height: 100%;
   transition: all 0.4s;
 }
 
-.music .dis-launch .recent-cm .desc-wd {
+.music .recent-listen .recent-cm .desc-wd {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -766,18 +804,18 @@ body {
   color: #fff;
 }
 
-.music .dis-launch .recent-cm .desc-wd p {
+.music .recent-listen .recent-cm .desc-wd p {
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.music .dis-launch .recent-cm .desc-wd p:hover {
+.music .recent-listen .recent-cm .desc-wd p:hover {
   color: #31c27c;
 }
 
-.music .dis-launch .recent-cm .ico-play {
+.music .recent-listen .recent-cm .ico-play {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -789,20 +827,20 @@ body {
   z-index: 3;
 }
 
-.music .dis-launch .recent-cm .dis-modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  background: rgba(0, 0, 0, 0.1);
+.music .recent-listen .recent-cm li:hover .ico-play,
+.music .recent-listen .recent-cm li:hover .dis-modal,
+.music .recent-listen .recent-cm li:hover .desc-wd {
+  -webkit-animation: iconShow 0.4s linear forwards;
+  animation: iconShow 0.4s linear forwards;
 }
 
-.music .dis-launch .recent-cm li:hover .ico-play,
-.music .dis-launch .recent-cm li:hover .dis-modal,
-.music .dis-launch .recent-cm li:hover .desc-wd {
-  animation: iconShow 0.4s linear forwards;
+@-webkit-keyframes iconShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes iconShow {
@@ -816,94 +854,6 @@ body {
 
 /* 最近常听结束  */
 
-/* 精彩推荐 */
-.hot-recommend {
-  width: 100%;
-  padding: 0.5rem;
-}
-
-.r-banner {
-  position: relative;
-  width: 107rem;
-  height: 26.6rem;
-  margin: 0 auto;
-  overflow: hidden;
-  margin-top: 3rem;
-}
-
-.r-banner:hover .r-arrow {
-  display: block;
-}
-
-.r-banner .imgs a {
-  width: 107rem;
-  float: left;
-}
-
-.r-banner .imgs img {
-  float: left;
-  width: 53rem;
-  height: 23.6rem;
-}
-
-.r-banner .imgs img:nth-of-type(1) {
-  margin-right: 1rem;
-}
-
-.r-banner .r-dots {
-  position: absolute;
-  bottom: 12px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  border-radius: 20px;
-}
-
-.r-banner .r-dots span {
-  float: left;
-  width: 8px;
-  height: 8px;
-  margin: 2px;
-  border-radius: 50%;
-  background: #ccc;
-}
-
-.r-banner .r-dots span.active {
-  background: #00f;
-}
-
-.r-banner .r-arrow {
-  display: none;
-}
-
-.r-banner .r-arrow .arrow-left,
-.r-banner .r-arrow .arrow-right {
-  position: absolute;
-  top: 50%;
-  width: 2.7rem;
-  height: 6.3rem;
-  margin-top: -3.15rem;
-  text-align: center;
-  line-height: 30px;
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer;
-}
-
-.r-banner .r-arrow .arrow-left {
-  left: 1rem;
-  border-radius: 0 20px 20px 0;
-  background: url("../assets/imgs/b-spirit.png");
-  background-position-y: -36rem;
-}
-
-.r-banner .r-arrow .arrow-right {
-  right: 1rem;
-  border-radius: 20px 0 0 20px;
-  background: url("../assets/imgs/b-spirit.png");
-  background-position: -2px -50.8rem;
-}
-/* 精彩推荐结束 */
 
 /* 排行榜 */
 
@@ -1117,7 +1067,7 @@ body {
   width: 100%;
   height: 30px;
   opacity: 0;
-  transition: opacity 0.5s linear;
+  transition: opacity 0s linear;
 }
 
 .rank-wrapper .rank-items .active .inner .desc {
@@ -1159,13 +1109,30 @@ body {
   transform: rotate(45deg);
 }
 
+.rank-wrapper .rank-items .active .inner .desc .more-songs {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding: 2.7rem;
+}
+
+.rank-wrapper .rank-items .active .inner .desc .more-songs li {
+  width: 30%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
 /* 排行榜结束 */
 
 /* 推荐音乐 */
 
 .lasest-recommend {
   padding: 1rem;
-  padding-top: 1rem;
+  padding-top: 1rem;xin
 }
 
 .lastest-recommend .m-title,
@@ -1224,6 +1191,7 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   transform-origin: 50% 50% -100px;
+  -webkit-animation: 0.3s ease-out forwards;
   animation: 0.3s ease-out forwards;
 }
 
@@ -1305,32 +1273,49 @@ body {
 }
 
 .wrap-lastest-item .i-top .picbox {
+  -webkit-animation-name: i-top;
   animation-name: i-top;
 }
 
 .wrap-lastest-item .o-top .picbox {
+  -webkit-animation-name: o-top;
   animation-name: o-top;
 }
 
 .wrap-lastest-item .i-bottom .picbox {
+  -webkit-animation-name: i-bottom;
   animation-name: i-bottom;
 }
 .wrap-lastest-item .o-bottom .picbox {
+  -webkit-animation-name: o-bottom;
   animation-name: o-bottom;
 }
 
 .wrap-lastest-item .i-right .picbox {
+  -webkit-animation-name: i-right;
   animation-name: i-right;
 }
 .wrap-lastest-item .o-right .picbox {
+  -webkit-animation-name: o-right;
   animation-name: o-right;
 }
 
 .wrap-lastest-item .i-left .picbox {
+  -webkit-animation-name: i-left;
   animation-name: i-left;
 }
 .wrap-lastest-item .o-left .picbox {
+  -webkit-animation-name: o-left;
   animation-name: o-left;
+}
+
+@-webkit-keyframes i-top {
+  from {
+    transform: rotate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate3d(1, 0, 0, -90deg);
+  }
 }
 
 @keyframes i-top {
@@ -1341,12 +1326,28 @@ body {
     transform: rotate3d(1, 0, 0, -90deg);
   }
 }
+@-webkit-keyframes o-top {
+  from {
+    transform: rotate3d(1, 0, 0, -90deg);
+  }
+  to {
+    transform: rotate3d(0, 0, 0);
+  }
+}
 @keyframes o-top {
   from {
     transform: rotate3d(1, 0, 0, -90deg);
   }
   to {
     transform: rotate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes i-bottom {
+  from {
+    transform: rotate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate3d(1, 0, 0, 90deg);
   }
 }
 @keyframes i-bottom {
@@ -1357,12 +1358,28 @@ body {
     transform: rotate3d(1, 0, 0, 90deg);
   }
 }
+@-webkit-keyframes o-bottom {
+  from {
+    transform: rotate3d(1, 0, 0, 90deg);
+  }
+  to {
+    transform: rotate3d(0, 0, 0);
+  }
+}
 @keyframes o-bottom {
   from {
     transform: rotate3d(1, 0, 0, 90deg);
   }
   to {
     transform: rotate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes i-right {
+  from {
+    transform: rotate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate3d(0, 1, 0, -90deg);
   }
 }
 @keyframes i-right {
@@ -1373,6 +1390,14 @@ body {
     transform: rotate3d(0, 1, 0, -90deg);
   }
 }
+@-webkit-keyframes o-right {
+  from {
+    transform: rotate3d(0, 1, 0, -90deg);
+  }
+  to {
+    transform: rotate3d(0, 0, 0);
+  }
+}
 @keyframes o-right {
   from {
     transform: rotate3d(0, 1, 0, -90deg);
@@ -1381,12 +1406,28 @@ body {
     transform: rotate3d(0, 0, 0);
   }
 }
+@-webkit-keyframes i-left {
+  from {
+    transform: rotate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate3d(0, 1, 0, 90deg);
+  }
+}
 @keyframes i-left {
   from {
     transform: rotate3d(0, 0, 0);
   }
   to {
     transform: rotate3d(0, 1, 0, 90deg);
+  }
+}
+@-webkit-keyframes o-left {
+  from {
+    transform: rotate3d(0, 1, 0, 90deg);
+  }
+  to {
+    transform: rotate3d(0, 0, 0);
   }
 }
 @keyframes o-left {
@@ -1400,7 +1441,123 @@ body {
 
 /* 推荐音乐结束 */
 
-/* 歌星介绍 */
+/* 精彩推荐 */
+.hot-mv {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.r-banner {
+  position: relative;
+  width: 107rem;
+  height: 26.6rem;
+  margin: 0 auto;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+
+.r-banner:hover .r-arrow {
+  display: block;
+}
+
+.r-banner .imgs .wrap-img {
+  width: 107rem;
+  float: left;
+}
+
+.r-banner .imgs a {
+  position: relative;
+  float: left;
+  width: 53rem;
+  height: 23.6rem;
+}
+
+.r-banner .imgs a .desc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.r-banner .imgs a .desc p {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.3rem;
+  color: #fff;
+
+}
+
+.r-banner .imgs a img {
+  width: 100%;
+  height: 100%;
+}
+
+.r-banner .imgs a:nth-of-type(1) {
+  margin-right: 1rem;
+}
+
+.r-banner .r-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.r-banner .r-dots span {
+  float: left;
+  width: 8px;
+  height: 8px;
+  margin: 2px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.r-banner .r-dots span.active {
+  background: #00f;
+}
+
+.r-banner .r-arrow {
+  display: none;
+}
+
+.r-banner .r-arrow .arrow-left,
+.r-banner .r-arrow .arrow-right {
+  position: absolute;
+  top: 50%;
+  width: 2.7rem;
+  height: 6.3rem;
+  margin-top: -3.15rem;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.r-banner .r-arrow .arrow-left {
+  left: 1rem;
+  border-radius: 0 20px 20px 0;
+  background: url("../assets/imgs/b-spirit.png");
+  background-position-y: -36rem;
+}
+
+.r-banner .r-arrow .arrow-right {
+  right: 1rem;
+  border-radius: 20px 0 0 20px;
+  background: url("../assets/imgs/b-spirit.png");
+  background-position: -2px -50.8rem;
+}
+/* 精彩推荐结束 */
+
+/* 歌手 */
 .show-singer {
   width: 100%;
   padding: 0.5rem;
@@ -1447,44 +1604,63 @@ body {
   background: rgba(0, 0, 0, 0.3);
   color: #fff;
   text-align: center;
-  line-height: 1.5;
+  line-height: 20rem;
   padding: 0.5rem;
-  animation: 2s linear forwards;
+  -webkit-animation: 0.5s linear forwards;
+  animation: 0.5s linear forwards;
   display: none;
+  font-size: 2rem;
 }
 
 .box .in-top {
   transform: translate3d(0, -100%, 0);
+  -webkit-animation-name: in-top;
   animation-name: in-top;
 }
 .box .out-top {
+  -webkit-animation-name: out-top;
   animation-name: out-top;
 }
 
 .box .in-right {
   transform: translate3d(100%, 0, 0);
+  -webkit-animation-name: in-right;
   animation-name: in-right;
 }
 
 .box .out-right {
+  -webkit-animation-name: out-right;
   animation-name: out-right;
 }
 
 .box .in-left {
   transform: translate3d(-100%, 0, 0);
+  -webkit-animation-name: in-left;
   animation-name: in-left;
 }
 
 .box .out-left {
+  -webkit-animation-name: out-left;
   animation-name: out-left;
 }
 
 .box .out-bottom {
+  -webkit-animation-name: out-bottom;
   animation-name: out-bottom;
 }
 .box .in-bottom {
   transform: translate3d(0, 100%, 0);
+  -webkit-animation-name: in-bottom;
   animation-name: in-bottom;
+}
+
+@-webkit-keyframes in-top {
+  from {
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes in-top {
@@ -1495,12 +1671,28 @@ body {
     transform: translate3d(0, 0, 0);
   }
 }
+@-webkit-keyframes out-top {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -100%, 0);
+  }
+}
 @keyframes out-top {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
     transform: translate3d(0, -100%, 0);
+  }
+}
+@-webkit-keyframes in-right {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
   }
 }
 @keyframes in-right {
@@ -1511,12 +1703,28 @@ body {
     transform: translate3d(0, 0, 0);
   }
 }
+@-webkit-keyframes out-right {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
 @keyframes out-right {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
     transform: translate3d(100%, 0, 0);
+  }
+}
+@-webkit-keyframes in-left {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
   }
 }
 @keyframes in-left {
@@ -1527,6 +1735,14 @@ body {
     transform: translate3d(0, 0, 0);
   }
 }
+@-webkit-keyframes out-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
 @keyframes out-left {
   from {
     transform: translate3d(0, 0, 0);
@@ -1535,12 +1751,28 @@ body {
     transform: translate3d(-100%, 0, 0);
   }
 }
+@-webkit-keyframes in-bottom {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
 @keyframes in-bottom {
   from {
     transform: translate3d(0, 100%, 0);
   }
   to {
     transform: translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes out-bottom {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 100%, 0);
   }
 }
 @keyframes out-bottom {
@@ -1552,24 +1784,141 @@ body {
   }
 }
 
-/* 歌星介绍介绍 */
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 5rem;
+  margin-top: 1rem;
+}
+
+.page .item {
+  width: 4rem;
+  height: 4rem;
+  text-align: center;
+  line-height: 4rem;
+  border: 1px solid #ccc;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  color: #008c8c;
+}
+
+.page .item.p-active,
+.page .item.s-active,
+.page .item.f-active {
+  border: none;
+  color: #fff;
+}
+
+.f-page {
+  visibility: hidden;
+}
+
+.page .item:hover {
+  border-color: #008c8c;
+  background: rgba(58, 97, 104, 0.3);
+}
+
+.singer-page {
+  visibility: hidden;
+}
+
+/* 歌手结束 */
+
+
+/* 我喜欢的歌单 */
 
 .my-favorite {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 2rem 10rem;
   transition: all 0.6s;
   transform: translateX(100%);
 }
 
+.f-banner {
+  position: relative;
+  height: 39rem;
+  margin: 0 auto;
+}
+
+.f-banner .f-main {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+
+
+.f-banner .nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 270px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.f-banner .nav .label {
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  padding-left: 25px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.f-banner .nav .list {
+  margin-left: 40px;
+}
+
+.f-banner .nav .item {
+  height: 35px;
+  line-height: 35px;
+  margin-bottom: 10px;
+  font-size: 0px;
+  color: #ff5c38;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.f-banner .nav .title {
+  font-size: 15px;
+  color: rgba(255, 255, 255, .7);
+  transition: font-size .08s;
+}
+
+.f-banner .nav .desc {
+  font-size: 13px;
+  color: #ff5c38;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.f-banner .nav .item.active {
+  font-size: 13px;
+}
+
+.f-banner .nav .item.active .title {
+  font-size: 22px;
+  color: #ff5c38;
+}
+
+.f-music {
+  width: 113rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+}
+
 .my-favorite .favorite-music {
   display: flex;
-  justify-content: space-around;
-  width: 119rem;
+  justify-content: space-between;
   flex-wrap: wrap;
-  padding: 2rem 0;
   margin: 0 auto;
   min-width: 110rem;
   margin-top: 1rem;
@@ -1578,7 +1927,7 @@ body {
 .my-favorite .favorite-music .music-item {
   position: relative;
   width: 20rem;
-  height: 20rem;
+  height: 30rem;
   margin-bottom: 1rem;
   box-shadow: 3px 10px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.4s;
@@ -1615,7 +1964,8 @@ body {
 }
 
 .my-favorite .favorite-music .music-item:hover {
-  transform: translateY(-0.2rem);
+  transform: translateY(-0.2rem)  scale(1.2, 1.06);
+  box-shadow: 0 2px 2rem #000;
 }
 
 .my-favorite .favorite-music .music-item .desc p {
@@ -1630,3 +1980,224 @@ body {
 .my-favorite .favorite-music .music-item .desc p:hover {
   color: #3a6168;
 }
+
+.rec-music {
+  width: 113rem;
+  margin: 5rem auto;
+}
+
+.daily-music {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+ margin-top: 2rem;
+}
+
+.daily-music .daily-item {
+  display: flex;
+  align-items: center;
+  width: 31rem;
+  height: 8rem;
+  cursor: pointer;
+  text-align: left;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.daily-music .daily-item .d-left {
+  width: 8rem;
+  height: 100%;
+  margin-right: 1rem;
+}
+
+.daily-music .daily-item .d-left img {
+  width: 100%;
+  height: 100%;
+}
+
+.daily-music .daily-item .d-right {
+  width: 22rem
+}
+
+.daily-music .daily-item .d-cm:hover {
+  color: #fff;
+}
+
+.daily-music .daily-item .d-songName, .daily-music .daily-item .d-singer {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.daily-music .daily-item .d-singer {
+  margin-top: 1rem;
+  color: #ccc;
+}
+
+
+/* 我的歌单结束  */
+
+/* canvas */
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+}
+/* canvas结束 */
+
+/* loading */
+.loading {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #3a6168;
+  z-index: 100;
+  display: none;
+}
+
+.loading h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.monster {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 11rem;
+  height: 10rem;
+  border-radius: 2rem;
+  margin: 0 1rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+  animation: jump 0.8s linear infinite alternate;
+  background: #db4d6d;
+}
+
+.monster .eye {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 1rem 0;
+}
+
+.monster .eye .eyeBall {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background: #0c4473;
+  animation: eyeMove 1.6s linear infinite alternate;
+}
+
+.monster .mouth {
+  width: 32%;
+  height: 1.2rem;
+  border-radius: 1.2rem;
+  background: #fff;
+}
+
+.monster::before, .monster::after {
+  position: absolute;
+  left: 50%;
+  top: -1rem;
+  display: block;
+  width: 20%;
+  height: 1rem;
+  content: '';
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.monster::before {
+  transform: translateX(-70%) rotate(45deg);
+}
+
+.monster::after {
+  transform: translateX(-30%) rotate(-45deg)
+}
+
+.monster.blue {
+  animation-delay: 0.5s;
+  background: #0c4473;
+}
+
+.monster.blue .eyeBall, .monster.blue .mouth {
+  background: #db4d6d;
+}
+
+@keyframes jump {
+  50% {
+      top: 0;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3)
+  }
+  100% {
+      top: -5rem;
+      box-shadow: 0 8rem 2rem rgba(0, 0, 0, 0.3)
+  }
+}
+
+@keyframes eyeMove {
+  from {
+      transform: translate(50%)
+  }
+  to {
+      transform: translate(-50%)
+  }
+}
+
+
+/* loading结束 */
+
+
+/* 底部 */
+
+.footer {
+  position: relative;
+  width: 100%;
+  height: 7rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  line-height: 7rem;
+  z-index: 10;
+}
+
+.footer h2 {
+  font-size: 3rem;
+  color: #fff;
+  -webkit-animation: colorChange 6s linear infinite;
+          animation: colorChange 6s linear infinite;
+}
+
+@-webkit-keyframes colorChange {
+  from {
+    color: #fff;
+  }
+  to {
+    color: #111;
+  }
+}
+
+@keyframes colorChange {
+  from {
+    color: #fff;
+  }
+  to {
+    color: #111;
+  }
+}
+
+
+/* 底部结束 */

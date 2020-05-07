@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>userDetail</title>
-    <link rel="stylesheet" href="./css/userDetail.css">
+    <link rel="stylesheet" href="../css/userDetail.css">
+    <link rel="icon" href="../favicon.ico">
 </head>
 <body>
     <header class="header">
@@ -18,6 +19,11 @@
             <p class="name"></p>
             <!-- 用户的关注和粉丝 -->
             <div class="follow">
+                <!-- 等级 -->
+                <div class="level">
+                    <p class="level-count"></p>
+                    <p class="desc">等级</p>
+                </div>
                 <!-- 关注人数 -->
                 <div class="follows">
                     <p class="follows-count"></p>
@@ -28,6 +34,12 @@
                     <p class="followeds-count"></p>
                     <p class="desc">粉丝</p>
                 </div>
+                <!-- 歌单数量 -->
+                <div class="songListNum">
+                    <p class="songList-count"></p>
+                    <p class="desc">歌单</p>
+                </div>
+                <!-- 歌单 -->
             </div>
         </div>
     </header>
@@ -38,6 +50,6 @@
         <ul class='recent-play'>
         </ul>
     </div>
-    <script src="./js/userDetail.js"></script>
+    <script src="../js/userDetail.js"></script>
 </body>
 </html>

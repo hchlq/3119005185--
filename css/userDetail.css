@@ -27,7 +27,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 12rem;
+  width: 30rem;
   margin: 0 auto;
 }
 
@@ -55,6 +55,7 @@ body {
 
 .header-bg .follow {
   display: flex;
+  justify-content: center;
   margin-top: 1rem;
   width: 100%;
   text-align: center;
@@ -62,8 +63,8 @@ body {
   color: #fff;
 }
 
-.header-bg .follow .follows {
-  margin-right: 1.5rem;
+.header-bg .follow > div {
+  margin: 0 1.5rem;
 }
 
 .header-bg .follow .desc {

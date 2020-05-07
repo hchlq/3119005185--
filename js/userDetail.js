@@ -72,16 +72,21 @@ let userInfo = (function () {
         let times = 0;
         function callback(data) {
             data = JSON.parse(data);
+            console.log(data);
             let bgUrl = data.profile.backgroundUrl; //背景
             let avUrl = data.profile.avatarUrl; //用户头像
+            let level = data.level; //等级
             let follows = data.profile.follows; //关注人数
             let followeds = data.profile.followeds; //粉丝人数
             let nickName = data.profile.nickname; //用户昵称
+            let songListNum = data.profile.playlistCount; //歌单数量
             o$('.avUrl').src = avUrl;
             o$('.header').style.backgroundImage = `url(${bgUrl})`;
             o$('.follows-count').innerText = follows;
             o$('.followeds-count').innerText = followeds;
             o$('.name').innerText = nickName
+            o$('.songList-count').innerText = songListNum
+            o$('.level-count').innerText = level;
         }
         ajaxFunc('post', `http://musicapi.leanapp.cn/user/record?uid=${userId}&type=1`, getSongs, true)
 
