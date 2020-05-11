@@ -73,16 +73,16 @@
                  playState: false,
                  volumeState: true,
                  modeState: 0,
-                 musicArr: [],
+                 musicArr: [], //存放播放音乐地址
                  oIndex: 0,
                  prograssWidth: o$('.prograss').offsetWidth,
                  volumePrograssWidth: o$('.volume').offsetWidth,
                  curDom: o$('.current'),
-                 musicPics: [],
+                 musicPics: [], //音乐图片
                  oAudio: o$('.audio'),
                  author: '',
                  songName: "",
-                 lyrics: []
+                 lyrics: [] //歌词
              }
              //合并对象
              let musicConfig = Object.assign({}, defaultConfig, options);
@@ -97,7 +97,7 @@
              }
 
              /**
-              * 假如传递的不是网络请求的歌曲
+              * 假如传递不是歌曲id或歌手id
               */
 
              if (musicConfig.oMusic) {
@@ -319,58 +319,110 @@
                  headMove.style.left = changeWidth + (-6) + 'px';
                  oPrograssMove.style.width = changeWidth + 'px'
              }
-
-
              /**
-              * 拖动进度条 音乐进度条
+              * 进度条
+              * @param {*} options 配置选项
               */
-             headMove.onmousedown = function (e) {
-                 e.stopPropagation();
-                 document.onmousemove = function (e) {
-                     let temp = e.clientX - headMove.offsetParent.offsetLeft;
-                     if (temp < 0) {
-                         temp = 0
+             function Prograss(options) {
+                 options.headMove.onmousedown = function (e) {
+                     e.stopPropagation();
+                     musicConfig.oAudio.ontimeupdate = null;
+                     musicConfig.oAudio.pause();
+                     document.onmousemove = function (e) {
+                         let temp = e.clientX - options.headMove.offsetParent.offsetLeft;
+                         if (temp < 0) {
+                             temp = 0;
+                         }
+                        //  总的进度条
+                         if (temp > options.prograssWidth) {
+                             temp = options.prograssWidth;
+                         }
+                         //大的头的移动
+                         options.headMove.style.left = temp + (-6) + 'px';
+                         // 进度条移动
+                         options.prograssingWidth.style.width = temp + 'px';
+                         if (options.changeMode === 'currentTime') {
+                             musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth) * musicConfig.oAudio.duration;
+
+                         } else { //改变的是声音
+                             musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth);
+                             if (musicConfig.oAudio[options.changeMode] === 0) {
+                                 volumeMode.style.backgroundPositionY = `-18rem`;
+                             } else {
+                                 volumeMode.style.backgroundPositionY = `-14.4rem`
+                             }
+                         }
+                         document.onmouseup = function () {
+                             if (options.changeMode === 'currentTime') {
+                                musicConfig.oAudio.play();
+                                 musicConfig.oAudio.ontimeupdate = function () {
+                                     setTime();
+                                     prograssMove()
+                                     // 更新当前的时间
+                                      let timeDisplay;
+                                      //用秒数来显示当前播放进度
+                                      timeDisplay = Math.floor(musicConfig.oAudio.currentTime); //获取实时时间
+                                      //处理时间
+                                      let minute = timeDisplay / 60;
+                                      let minutes = parseInt(minute);
+                                      if (minutes < 10) {
+                                          minutes = "0" + minutes;
+                                      }
+                                      //秒
+                                      let second = timeDisplay % 60;
+                                      let seconds = Math.round(second);
+                                      if (seconds < 10) {
+                                          seconds = "0" + seconds;
+                                      }
+                                      musicConfig.curDom.innerText = minutes + ':' + seconds
+                                 }
+                             }
+                             document.onmousemove = null;
+                         }
                      }
-                     if (temp > musicConfig.prograssWidth) {
-                         temp = musicConfig.prograssWidth;
-                     }
-                     headMove.style.left = temp + (-6) + 'px';
-                     oPrograssMove.style.width = temp + 'px';
-                     musicConfig.oAudio.currentTime = (parseInt(oPrograssMove.style.width) / musicConfig.prograssWidth) * musicConfig.oAudio.duration;
-                     prograssMove();
                  }
-                 document.onmouseup = function () {
-                     document.onmousemove = null;
+                 options.prograss.onmousedown = function (e) {
+                    if (e.button !== 0) { //点击不是左键
+                        return;
+                    }
+                    e.stopPropagation();
+                    if (!musicConfig.playState) {
+                        play()
+                        musicConfig.playState = true;
+                    }
+                    options.headMove.style.left = e.offsetX + (-6) + 'px';
+                    options.prograssingWidth.style.width = e.offsetX + 'px';
+                    if (options.changeMode === 'currentTime') {//音乐进度条
+                        musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth) * musicConfig.oAudio.duration;
+
+                    } else { //改变的是声音
+                        musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth);
+                        if (musicConfig.oAudio[options.changeMode] === 0) {
+                            volumeMode.style.backgroundPositionY = `-18rem`;
+                        } else {
+                            volumeMode.style.backgroundPositionY = `-14.4rem`
+                        }
+                    }
                  }
              }
+             //音乐进度条
+             new Prograss({
+                 headMove: headMove,
+                 prograssingWidth: oPrograssMove,
+                 prograssWidth: musicConfig.prograssWidth,
+                 changeMode: 'currentTime',
+                 prograss: o$('.prograss')
+             })
+             //  声音
+             new Prograss({
+                 headMove: volumeMove,
+                 prograssingWidth: o$('.volume-prograss'),
+                 prograssWidth: musicConfig.volumePrograssWidth,
+                 changeMode: 'volume',
+                 prograss: volume
+             })
 
-             /**
-              * 拖动进度条 音量进度条
-              */
-
-             volumeMove.onmousedown = function (e) {
-                 e.stopPropagation()
-                 document.onmousemove = function (e) {
-                     let temp = e.clientX - volumeMove.offsetParent.offsetLeft;
-                     if (temp < 0) {
-                         temp = 0
-                     }
-                     if (temp > musicConfig.volumePrograssWidth) {
-                         temp = musicConfig.volumePrograssWidth;
-                     }
-                     volumeMove.style.left = temp + (-6) + 'px';
-                     o$('.volume-prograss').style.width = temp + 'px';
-                     musicConfig.oAudio.volume = (parseInt(o$('.volume-prograss').style.width) / musicConfig.volumePrograssWidth);
-                     if (musicConfig.oAudio.volume === 0) {
-                        volumeMode.style.backgroundPositionY = `-18rem`;
-                     } else {
-                        volumeMode.style.backgroundPositionY = `-14.4rem`
-                     }
-                 }
-                 document.onmouseup = function () {
-                     document.onmousemove = null;
-                 }
-             }
+           
 
              /**
               * 自动播放完毕后初始化元素
@@ -391,8 +443,6 @@
                  //处理歌词 
                  if (musicConfig.lyrics.length > 0) {
                      initLyrics(musicConfig.lyrics[musicConfig.oIndex]);
-                     o$('.wrapper-lyrics').scrollTop = 0;
-                     everyTime = 1;
                  }
                  changeMusic(musicConfig.oIndex)
                  if (musicConfig.oMusic) {
@@ -403,48 +453,7 @@
                  changeBg(musicConfig.oIndex)
              }
 
-             /**
-              * 点击进度条 音乐进度条
-              */
 
-             o$('.prograss').onmousedown = function (e) {
-                 if (e.button !== 0) { //点击不是左键
-                     return;
-                 }
-                 e.stopPropagation();
-                 if (!musicConfig.playState) {
-                     play()
-                     musicConfig.playState = true;
-                 }
-                 headMove.style.left = e.offsetX + (-6) + 'px';
-                 oPrograssMove.style.width = e.offsetX + 'px';
-                 musicConfig.oAudio.currentTime = (parseInt(oPrograssMove.style.width) / musicConfig.prograssWidth) * musicConfig.oAudio.duration;
-
-                 prograssMove();
-             }
-
-             /**
-              * 点击进度条 声音进度条
-              */
-
-             volume.onmousedown = function (e) {
-                 if (e.button !== 0) {
-                     return;
-                 }
-                 e.stopPropagation()
-                 if (!musicConfig.playState) {
-                     play()
-                     musicConfig.playState = true;
-                 }
-                 volumeMove.style.left = e.offsetX + (-6) + 'px';
-                 o$('.volume-prograss').style.width = e.offsetX + 'px';
-                 musicConfig.oAudio.volume = (parseInt(o$('.volume-prograss').style.width) / musicConfig.volumePrograssWidth);
-                 if (musicConfig.oAudio.volume === 0) {
-                    volumeMode.style.backgroundPositionY = `-18rem`;
-                 } else {
-                    volumeMode.style.backgroundPositionY = `-14.4rem`
-                 }
-             }
 
              //点击静音或恢复声音
              let tempVolume = 0;
@@ -504,80 +513,117 @@
                      return Math.floor(Math.random() * (max - min + 1) + min)
                  }
              }
-
-             /**
-              * 更新时间
-              */
-             musicConfig.oAudio.addEventListener("timeupdate", function () { //监听音频播放的实时时间事件
-                 let timeDisplay;
-                 //用秒数来显示当前播放进度
-                 timeDisplay = Math.floor(musicConfig.oAudio.currentTime); //获取实时时间
-                 //处理时间
-                 let minute = timeDisplay / 60;
-                 let minutes = parseInt(minute);
-                 if (minutes < 10) {
-                     minutes = "0" + minutes;
-                 }
-                 //秒
-                 let second = timeDisplay % 60;
-                 let seconds = Math.round(second);
-                 if (seconds < 10) {
-                     seconds = "0" + seconds;
-                 }
-                 musicConfig.curDom.innerText = minutes + ':' + seconds
-
-             })
              /**
               * 处理歌词
               */
              function initLyrics(str) {
                  if (str) {
+                     let lyricsDom = o$('.lyrics')
                      let lyrics = str.split('[');
-                     o$('.lyrics').innerHTML = '';
                      let fragment = document.createDocumentFragment();
+                     lyricsDom.innerHTML = '';
                      let time;
-                     lyrics.forEach(function (ele) {
-                         let lyricsSplice = ele.split(']');
-                         if (lyricsSplice[0]) {
-                             // 得到时间
-                             let res = lyricsSplice[0].split('.');
-                             let result = res[0].split(':');
-                             time = parseInt(result[0]) * 60 + parseInt(result[1]);
+                     /**
+                      * 获取歌词和时间
+                      */
+                     function getLyrArr() {
+                         let lycArr = [];
+                         lyrics.forEach(function (ele) {
+                             let res = getObj(ele);
+                             lycArr.push(res);
+
+                         })
+
+                         function getObj(ele) {
+                             let lyrObj = {};
+                             let lyricsSplice = ele.split(']');
+                             if (lyricsSplice[0]) {
+                                 // 得到时间
+                                 let res = lyricsSplice[0].split('.');
+                                 let result = res[0].split(':');
+                                 result[0] = +result[0];
+                                 result[1] = +result[1]
+                                 time = result[0] * 60 + result[1];
+                                 if (time) {
+                                     lyrObj.time = time
+                                 }
+                             }
+                             if (lyricsSplice.length > 1) {
+                                 let lyr = lyricsSplice[1];
+                                 if (lyr) {
+                                     lyrObj.lyr = lyr;
+                                 }
+                             }
+                             return lyrObj
                          }
-                         if (lyricsSplice.length > 1 && time !== 0) {
-                             let p = document.createElement('p')
-                             p.className = time;
-                             p.innerHTML = lyricsSplice[1]
-                             fragment.appendChild(p);
-                         }
+                         return lycArr;
+                     }
+                     let lyrArr = getLyrArr();
+                     //  给歌词排序
+                     lyrArr = lyrArr.sort(function (ele1, ele2) {
+                         return ele1.time - ele2.time
                      })
-                     o$('.lyrics').appendChild(fragment);
+                     //  创建元素
+                     for (let i = 0; i < lyrArr.length; i++) {
+                         let p = document.createElement('p');
+                         if (lyrArr[i].lyr) {
+                             p.innerText = lyrArr[i].lyr
+                         }
+                         fragment.appendChild(p);
+                     }
+                     lyricsDom.appendChild(fragment)
+
+                     /**
+                      * 算出距离并且设置歌词高亮
+                      */
+                     function setActive(i) {
+                         //  当前播放的是i
+                         let topDis = ((i) * 33 + 33 / 2) - (350 / 2);
+                         if (topDis < 0) {
+                             topDis = 0;
+                         }
+                         o$('.lyrics').style.marginTop = -topDis + 'px'
+                         if (o$('.active')) {
+                             o$('.active').classList.remove('active');
+                         }
+                         lyricsDom.children[i].classList.add('active');
+                     }
+                     /**
+                      * 算出时间
+                      */
+                      setTime = function () {
+                         let time = musicConfig.oAudio.currentTime - 0.6;
+                         for (let i = 0; i < lyrArr.length; i++) {
+                             if (time < lyrArr[i].time) {
+                                 setActive(i - 1);
+                                 break;
+                             }
+                         }
+                     }
+
                  }
+                 musicConfig.oAudio.ontimeupdate = function () {
+                    setTime();
+                    prograssMove()
+                    // 更新当前的时间
+                     let timeDisplay;
+                     //用秒数来显示当前播放进度
+                     timeDisplay = Math.floor(musicConfig.oAudio.currentTime); //获取实时时间
+                     //处理时间
+                     let minute = timeDisplay / 60;
+                     let minutes = parseInt(minute);
+                     if (minutes < 10) {
+                         minutes = "0" + minutes;
+                     }
+                     //秒
+                     let second = timeDisplay % 60;
+                     let seconds = Math.round(second);
+                     if (seconds < 10) {
+                         seconds = "0" + seconds;
+                     }
+                     musicConfig.curDom.innerText = minutes + ':' + seconds
+                }
              }
-
-
-
-             /**
-              * 根据时间变化进度条改变
-              */
-             musicConfig.oAudio.addEventListener('timeupdate', function () {
-                 let current = parseInt(this.currentTime) - 1;
-                 if (document.querySelector(`[class='${current}']`)) {
-                     times++;
-                     if (0 <= times % 4 <= 3) {}
-                     if (times % 4 === 2) {
-                         o$('.wrapper-lyrics').scrollTop = everyTime * 30;
-                         everyTime++;
-                     }
-                     if (document.querySelector(`[class='${index}']`)) {
-                         document.querySelector(`[class='${index}']`).style.color = '#eee';
-                     }
-                     index = current;
-                     document.querySelector(`[class='${current}']`).style.color = '#8e44ad';
-                 }
-                 prograssMove();
-             });
-
 
              /**
               * 监听资源加载完毕，设置总时间
@@ -602,9 +648,7 @@
                  initElement()
              }
          }
-         let per = 0,
-             timer = null,
-             loading = o$('.loading');
+         let loading = o$('.loading');
          let options;
          if (location.href.includes('sid')) { //传了歌手id
              let musicArr = [];
@@ -626,14 +670,16 @@
                      let picUrl = ele.al.picUrl;
                      let songName = ele.name;
                      let id = ele.id;
-                     //  使用ajax拿回歌词
                      $.ajax({
-                         type: 'post',
-                         url: 'http://music.163.com/api/song/media',
-                         dataType: 'jsonp',
-                         data: `id=${id}`,
+                         type: 'get',
+                         url: 'https://api.imjad.cn/cloudmusic',
+                         data: `type=lyric&id=${id}`,
                          success: function (data) {
-                             mergeSongs(id, songName, picUrl, data.lyric, authors);
+                             if (data.lrc) {
+                                 mergeSongs(id, songName, picUrl, data.lrc.lyric, authors);
+                             } else {
+                                 mergeSongs(id, songName, picUrl, null, authors);
+                             }
                          }
                      })
                  })
@@ -671,13 +717,13 @@
                  let author = JSON.parse(data).songs[0].ar[0].name; //歌手
                  let songName = JSON.parse(data).songs[0].al.name;
                  let lyrics = [];
+
                  $.ajax({
-                     type: 'post',
-                     url: 'http://music.163.com/api/song/media',
-                     dataType: 'jsonp',
-                     data: `id=${location.href.split('?')[1].split('=')[1]}`,
+                     type: 'get',
+                     url: 'https://api.imjad.cn/cloudmusic',
+                     data: `type=lyric&id=${location.href.split('?')[1].split('=')[1]}`,
                      success: function (data) {
-                         lyrics.push(data.lyric);
+                         lyrics.push(data.lrc.lyric);
                          //  loading去掉
                          loading.style.display = 'none';
                          player(options);
@@ -732,13 +778,23 @@
                      let url = JSON.parse(data).songs[0].al.picUrl; //图片
                      let author = JSON.parse(data).songs[0].ar[0].name; //歌手
                      let songName = JSON.parse(data).songs[0].al.name; //歌名
+                     //  $.ajax({
+                     //      type: 'post',
+                     //      url: 'http://music.163.com/api/song/media',
+                     //      dataType: 'jsonp',
+                     //      data: `id=${id}`,
+                     //      success: function (data) {
+                     //          merge(id, url, author, songName, data.lyric)
+                     //     }
+                     // })
                      $.ajax({
-                         type: 'post',
-                         url: 'http://music.163.com/api/song/media',
-                         dataType: 'jsonp',
-                         data: `id=${id}`,
+                         type: 'get',
+                         url: 'https://api.imjad.cn/cloudmusic',
+                         data: `type=lyric&id=${id}`,
                          success: function (data) {
-                             merge(id, url, author, songName, data.lyric)
+                             if (data.lrc) {
+                                 merge(id, url, author, songName, data.lrc.lyric)
+                             }
                          }
                      })
                  }

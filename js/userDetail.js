@@ -72,7 +72,6 @@ let userInfo = (function () {
         let times = 0;
         function callback(data) {
             data = JSON.parse(data);
-            console.log(data);
             let bgUrl = data.profile.backgroundUrl; //背景
             let avUrl = data.profile.avatarUrl; //用户头像
             let level = data.level; //等级
@@ -103,7 +102,7 @@ let userInfo = (function () {
             <li class='item'>
                 <a href="#" class='song-name cm'>${songName}</a>
                 <a href="#" class='singer cm'>${author}</a>
-                <a href=" file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/music.html?id=${id}" class='play' target='_blank'>播放</a>
+                <a href="./music.html?id=${id}" class='play' target='_blank'>播放</a>
              </li>
             `
                 if (times === data.length) {

@@ -44,7 +44,7 @@
                     <span'>main</span>
                 </li>
                 <li class='nav-item o-favorite'><span>My FavoriteMusic</span></li>
-                <li class='nav-item'><a href="file:///D:/二轮考核/C.A.T/html/music.html"
+                <li class='nav-item'><a href="./music.html"
                         target='_blank'>
                         Player
                     </a></li>
@@ -60,69 +60,69 @@
                     </li>
                 </ul>
                 <!-- 登录框 -->
-                <div class=" form container">
-                    <form action="" class="form-resigter">
-                        <div class="form-container register-container">
-                            <h2>注册</h2>
-                            <div class="validator-phone">
-                                <div class='form-item register-phone'>
-                                    <input type="text" class='data-validator' name='phone' placeholder="手机号">
-                                    <div class="error phone-error"></div>
+                    <div class=" form container">
+                        <form action="" class="form-resigter">
+                            <div class="form-container register-container">
+                                <h2>注册</h2>
+                                <div class="validator-phone">
+                                    <div class='form-item register-phone'>
+                                        <input type="text" class='data-validator' name='phone' placeholder="手机号">
+                                        <div class="error phone-error"></div>
+                                    </div>
+                                    <button class="getValidatorCode" type='button'>获取验证码</button>
                                 </div>
-                                <button class="getValidatorCode" type='button'>获取验证码</button>
+                                <div class="is-show">
+                                    <div class='form-item' data-field-container='nickName'>
+                                        <input type="text" data-field class='register-focus' name='phone' placeholder="昵称">
+                                        <div class="error"></div>
+                                    </div>
+                                    <div class='form-item' data-field-container='phone'>
+                                        <input type="text" data-field class='register-focus' name='phone' placeholder="手机号">
+                                        <div class="error"></div>
+                                    </div>
+                                    <div class='form-item' data-field-container="pwd">
+                                        <input type="password" data-field name='password' placeholder="密码">
+                                        <div class="error"></div>
+                                    </div>
+                                    <div class='form-item' data-field-container='validatorCode'>
+                                        <input type="text" data-field class='register-focus' name='phone' placeholder="验证码">
+                                        <div class="error"></div>
+                                    </div>
+                                    <button class='startRegister' type='button'>注册</button>
+                                </div>
                             </div>
-                            <div class="is-show">
-                                <div class='form-item' data-field-container='nickName'>
-                                    <input type="text" data-field class='register-focus' name='phone' placeholder="昵称">
-                                    <div class="error"></div>
-                                </div>
+                        </form>
+                        <form action="" class='form-login'>
+                            <div class="form-container login-container">
+                                <h2>登录</h2>
                                 <div class='form-item' data-field-container='phone'>
-                                    <input type="text" data-field class='register-focus' name='phone' placeholder="手机号">
+                                    <input type="text" data-field class='login-focus' name='phone' placeholder="手机号">
                                     <div class="error"></div>
                                 </div>
                                 <div class='form-item' data-field-container="pwd">
                                     <input type="password" data-field name='password' placeholder="密码">
                                     <div class="error"></div>
+                                    <div class="show-login-error">账号或密码错误</div>
                                 </div>
-                                <div class='form-item' data-field-container='validatorCode'>
-                                    <input type="text" data-field class='register-focus' name='phone' placeholder="验证码">
-                                    <div class="error"></div>
+                                <button type='button' class='startLogin'>登录</button>
+                            </div>
+                        </form>
+                        <div class="tip-container">
+                            <div class="tip">
+                                <div class="tip-panel tip-left">
+                                    <h2>已有账号?</h2>
+                                    <p>请使用您的账号进行登录</p>
+                                    <buttom type='button' class="o-login">登录</buttom>
                                 </div>
-                                <button class='startRegister' type='button'>注册</button>
+                                <div class="tip-panel tip-right">
+                                    <h2>没有账号?</h2>
+                                    <p>立即注册加入我们吧,一起开启新的音乐旅程!</p>
+                                    <button type='button' class="o-register">注册</button>
+                                </div>
                             </div>
                         </div>
-                    </form>
-                    <form action="" class='form-login'>
-                        <div class="form-container login-container">
-                            <h2>登录</h2>
-                            <div class='form-item' data-field-container='phone'>
-                                <input type="text" data-field class='login-focus' name='phone' placeholder="手机号">
-                                <div class="error"></div>
-                            </div>
-                            <div class='form-item' data-field-container="pwd">
-                                <input type="password" data-field name='password' placeholder="密码">
-                                <div class="error"></div>
-                                <div class="show-login-error">账号或密码错误</div>
-                            </div>
-                            <button type='button' class='startLogin'>登录</button>
-                        </div>
-                    </form>
-                    <div class="tip-container">
-                        <div class="tip">
-                            <div class="tip-panel tip-left">
-                                <h2>已有账号?</h2>
-                                <p>请使用您的账号进行登录</p>
-                                <buttom type='button' class="o-login">登录</buttom>
-                            </div>
-                            <div class="tip-panel tip-right">
-                                <h2>没有账号?</h2>
-                                <p>立即注册加入我们吧,一起开启新的音乐旅程!</p>
-                                <button type='button' class="o-register">注册</button>
-                            </div>
-                            <div class="cancle"></div>
-                        </div>
+                        <div class="cancle"></div>
                     </div>
-                </div>
             </ul>
         </nav>
     </header>
@@ -163,7 +163,7 @@
                                     <a href="#">周笔畅</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=485960228"
+                            <a href="./music.html?id=485960228"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/2.jpg" alt=""></a>
@@ -175,7 +175,7 @@
                                     <a href="#">阿冗</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1413585838"
+                            <a href="./music.html?id=1413585838"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/3.jpg" alt=""></a>
@@ -187,7 +187,7 @@
                                     <a href="#">Sasha Sloan</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1374329431"
+                            <a href="./music.html?id=1374329431"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/4.jpg" alt=""></a>
@@ -200,7 +200,7 @@
                                     <a href="#">杨和苏KeyNG</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1383219381"
+                            <a href="./music.html?id=1383219381"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/5.jpg" alt=""></a>
@@ -213,7 +213,7 @@
                                     <a href="#">阿冗</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1400256289"
+                            <a href="./music.html?id=1400256289"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/6.jpg" alt=""></a>
@@ -226,7 +226,7 @@
                                     <a href="#">南征北战NZBZ/</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=467595237"
+                            <a href="./music.html?id=467595237"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/7.jpg" alt=""></a>
@@ -239,7 +239,7 @@
                                     <a href="#">Sad Eye</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=457552130"
+                            <a href="./music.html?id=457552130"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/8.jpg" alt=""></a>
@@ -253,7 +253,7 @@
                                     <a href="#">永彬Ryan.B / AY楊佬叁</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=480580003"
+                            <a href="./music.html?id=480580003"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/9.jpg" alt=""></a>
@@ -267,7 +267,7 @@
                                     <a href="#">张紫豪</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=553755659"
+                            <a href="./music.html?id=553755659"
                                 target="_blank" class="ico-play"></a>
                         </li>
                         <li><a href="#"><img src="../assets/imgs/recent-listen/10.jpg" alt=""></a>
@@ -281,7 +281,7 @@
                                     <a href="#">季星星</a>
                                 </p>
                             </div>
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1403800769"
+                            <a href="./music.html?id=1403800769"
                                 target="_blank" class="ico-play"></a>
                         </li>
                     </ul>
@@ -321,7 +321,7 @@
                                         </div>
                                         <div class="rank-song">
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1378461989"
+                                                <a href="./music.html?id=1378461989"
                                                     target="_blank">
                                                     <p>
                                                         1 <span>与你无关</span>
@@ -330,7 +330,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=527601001" target="_blank">
+                                                <a href="./music.html?id=527601001" target="_blank">
                                                     <p>
                                                         2 <span>少年</span>
                                                         <p>邹玲儿</p>
@@ -338,7 +338,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1331819951"
+                                                <a href="./music.html?id=1331819951"
                                                     target="_blank">
                                                     <p>
                                                         3 <span>像鱼</span>
@@ -369,7 +369,7 @@
                                         </div>
                                         <div class="rank-song">
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=534542079"
+                                                <a href="./music.html?id=534542079"
                                                     target="_blank">
                                                     <p>
                                                         1 <span>侧脸</span>
@@ -378,7 +378,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=553755659"
+                                                <a href="./music.html?id=553755659"
                                                     target='_blank'>
                                                     <p>
                                                         2 <span>可不可以</span>
@@ -387,7 +387,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1440315822"
+                                                <a href="./music.html?id=1440315822"
                                                     target="_blank">
                                                     <p>
                                                         3 <span>再见一面</span>
@@ -418,7 +418,7 @@
                                         </div>
                                         <div class="rank-song">
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1436709403"
+                                                <a href="./music.html?id=1436709403"
                                                     target="_blank">
                                                     <p>
                                                         1 <span>夏天的风</span>
@@ -427,7 +427,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1441576108"
+                                                <a href="./music.html?id=1441576108"
                                                     target="_blank">
                                                     <p>
                                                         2 <span>点歌的人</span>
@@ -437,7 +437,7 @@
                                             </div>
 
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1403215687"
+                                                <a href="./music.html?id=1403215687"
                                                     target="_blank">
                                                     <p>
                                                         3 <span>想见你想见你想见你(Live)</span>
@@ -468,7 +468,7 @@
                                         </div>
                                         <div class="rank-song">
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=450222544"
+                                                <a href="./music.html?id=450222544"
                                                     target="_blank">
                                                     <p>
                                                         1 <span>AOA</span>
@@ -477,7 +477,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1377145180"
+                                                <a href="./music.html?id=1377145180"
                                                     target="_blank">
                                                     <p>
                                                         2 <span>Heading Home</span>
@@ -486,7 +486,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1440410293"
+                                                <a href="./music.html?id=1440410293"
                                                     target="_blank">
                                                     <p>
                                                         3 <span>FatKan</span>
@@ -517,7 +517,7 @@
                                         </div>
                                         <div class="rank-song">
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1296067209"
+                                                <a href="./music.html?id=1296067209"
                                                     target="_blank">
                                                     <p>
                                                         1 <span>time</span>
@@ -526,7 +526,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1395035020"
+                                                <a href="./music.html?id=1395035020"
                                                     target="_blank">
                                                     <p>
                                                         2 <span>Remember</span>
@@ -535,7 +535,7 @@
                                                 </a>
                                             </div>
                                             <div class="song-item">
-                                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=1436264336"
+                                                <a href="./music.html?id=1436264336"
                                                     target="_blank">
                                                     <p>
                                                         3 <span>舞い落ちる花びら（Fallin' Flower）</span>
@@ -602,7 +602,7 @@
                     </div>
                     <ul class="wrap-box">
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=167013" target="_blank">
+                            <a href="./music.html?sid=167013" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/3.jpg" alt="">
                                 </div>
@@ -612,7 +612,7 @@
                             </a>
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=4292" target="_blank">
+                            <a href="./music.html?sid=4292" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/4.jpg" alt="">
                                 </div>
@@ -623,7 +623,7 @@
 
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=816248" target="_blank">
+                            <a href="./music.html?sid=816248" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/8.jpg" alt="">
                                 </div>
@@ -633,7 +633,7 @@
                             </a>
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=1007170" target="_blank">
+                            <a href="./music.html?sid=1007170" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/9.jpg" alt="">
                                 </div>
@@ -644,7 +644,7 @@
 
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=6452" target="_blank">
+                            <a href="./music.html?sid=6452" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/10.jpg" alt="">
                                 </div>
@@ -655,7 +655,7 @@
 
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=3684" target="_blank">
+                            <a href="./music.html?sid=3684" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/11.jpg" alt="">
                                 </div>
@@ -667,7 +667,7 @@
 
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=3694" target="_blank">
+                            <a href="./music.html?sid=3694" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/12.jpg" alt="">
                                 </div>
@@ -678,7 +678,7 @@
 
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=3694" target="_blank">
+                            <a href="./music.html?sid=3694" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/13.jpg" alt="">
                                 </div>
@@ -690,7 +690,7 @@
 
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=6472" target="_blank">
+                            <a href="./music.html?sid=6472" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/14.jpg" alt="">
                                 </div>
@@ -700,7 +700,7 @@
                             </a>
                         </li>
                         <li class="box">
-                            <a href="file:///D:/二轮考核/C.A.T/music.html?sid=1038093" target="_blank">
+                            <a href="./music.html?sid=1038093" target="_blank">
                                 <div class='img'>
                                     <img src="../assets/imgs/showSinger/15.jpg" alt="">
                                 </div>
@@ -776,7 +776,6 @@
         </div>
         <h2>登录中...</h2>
     </div>
-    <canvas class="canvas"></canvas>
     <script src='../js/index.js'></script>
 </body>
 

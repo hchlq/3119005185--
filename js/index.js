@@ -79,7 +79,6 @@ function debounce(fn, time) {
         }
         let args = arguments;
         timer = setTimeout(function () {
-            str = '';
             fn(...args);
         }, time);
     }
@@ -125,7 +124,7 @@ let search = (function () {
                 function render(id, name) {
                     str += `
                     <li>
-                        <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${id}" target='_blank'>
+                        <a href="./music.html?id=${id}" target='_blank'>
                             <span>${name}</span>
                         </a>
                     </li>
@@ -203,7 +202,7 @@ let search = (function () {
         function render(id, imgUrl, songName, author) {
             str += `
                 <li>   
-                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${id}" target='_blank'>
+                <a href="./music.html?id=${id}" target='_blank'>
                     <div class="left-img">
                     <img src='${imgUrl}'/>
                     </div>
@@ -586,14 +585,15 @@ let login = (function () {
                         message: "手机号格式不正确"
                     }
                 ],
-                pwd: [{
+                pwd: [
+                    {
                         rule: 'required',
                         message: '请输入密码',
                     },
                     {
                         rule: /^.{6,12}$/,
                         message: "密码必须是6-12位"
-                    }
+                    }   
                 ],
             },
             errorClass: 'has-error'
@@ -696,7 +696,8 @@ let login = (function () {
         startLogin.onclick = function () {
             formValidatorLogin.startValidator(true);
             userInfo = formValidatorLogin.getFormData();
-            if (formValidatorLogin) {
+            let result = formValidatorLogin.validate();
+            if (result.length === 0) {//校验没有错误的时候
                 ajaxFunc('post', `http://musicapi.leanapp.cn/login/cellphone?phone=${userInfo.phone}&password=${userInfo.pwd}`, callback, true);
                 // 显示loaing框
                 o$('.loading').style.display = 'flex';
@@ -722,7 +723,7 @@ let login = (function () {
                         let picUrl = data[i].album.picUrl;
                         let id = data[i].id
                         str += `
-                        <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${id}" target="_blank">
+                        <a href="./music.html?id=${id}" target="_blank">
                             <li class="daily-item">
                                 <div class="d-left">
                                     <img src="${picUrl}" alt="">
@@ -777,7 +778,7 @@ let login = (function () {
                                                 <a href="#">${author}</a>
                                             </p>
                                         </div>
-                                        <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${id}"
+                                        <a href="./music.html?id=${id}"
                                             target="_blank" class="ico-play"></a>
                                         <i class="dis-modal"></i>
                                      </li>
@@ -795,11 +796,21 @@ let login = (function () {
                     renderData(0, 10);
                     let pages = o$('.recent-page .item', true);
                     let len = pages.length;
+                    // 得到余数
+                    let rest = data.length % 10;
+                    // 得到10的倍数的数量
+                    let num = (data.length - rest) / 10;
                     for (let i = 0; i < len; i++) {
                         pages[i].onclick = function () {
                             o$('.p-active').classList.remove('p-active');
                             this.classList.add('p-active');
-                            renderData(i * 10, (i + 1) * 10);
+                            if (i < num) {
+                                renderData(i * 10, (i + 1) * 10);
+                            } else if (rest !== 0) {
+                                renderData(i * 10, (i * 10) + rest)
+                            } else {
+                                renderData(i * 10, (i + 1) * 10);
+                            }
                         }
                     }
                 }
@@ -963,7 +974,7 @@ let login = (function () {
                             if (pageNum > 22) { //限制数量
                                 pageNum = 22;
                             }
-                            // 保存起来，统一查到f-page中
+                            // 保存起来，统一插到f-page中
                             let fragment = document.createDocumentFragment();
                             for (let i = 0; i < pageNum; i++) {
                                 let li = document.createElement('li');
@@ -1023,7 +1034,7 @@ let login = (function () {
                     if (len > 10) { //数据长度大于10
                         str += `
                             <li class="music-item">
-                                <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${id}" target='_blank'><img src="${url}" alt="" target='_blank'></a>
+                                <a href="./music.html?id=${id}" target='_blank'><img src="${url}" alt="" target='_blank'></a>
                                 <div class="desc">
                                     <p>${author}</p>
                                     <p>${songName}</p>
@@ -1049,7 +1060,7 @@ let login = (function () {
                     } else {
                         str += `
                         <li class="music-item">
-                            <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${id}" target='_blank'><img src="${url}" alt="" target='_blank'></a>
+                            <a href="./music.html?id=${id}" target='_blank'><img src="${url}" alt="" target='_blank'></a>
                             <div class="desc">
                                 <p>${author}</p>
                                 <p>${songName}</p>
@@ -1101,7 +1112,7 @@ let login = (function () {
                 let uid = JSON.parse(data).profile.userId;
 
                 //设置个人信息的地址
-                o$('.p-info').href = `file:///D:/%E4%BA%8C%E8%BD%AE%E8%80%83%E6%A0%B8/C.A.T/html/userDetail.html?id=${uid}`
+                o$('.p-info').href = `./userDetail.html?id=${uid}`
 
                 //获取用户最近播放
                 getRecentPlay(uid)
@@ -1188,7 +1199,7 @@ let banner = (function () {
             let str = "";
             let fragment = document.createDocumentFragment();
             for (let i = 0; i < len; i++) {
-                str += `<li class='item${i + 1}'><a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${data[i].url.split('=')[1]}" target='_blank'><img src="${data[i].picUrl}" alt=""></a></li>`
+                str += `<li class='item${i + 1}'><a href="./music.html?id=${data[i].url.split('=')[1]}" target='_blank'><img src="${data[i].picUrl}" alt=""></a></li>`
                 liNames.push(`item${i + 1}`)
                 //动态创建span元素
                 let span = document.createElement('span');
@@ -1364,7 +1375,7 @@ let rank = (function () {
                     let author = data[i].ar[0].name;
                     str += `
                     <li>
-                        <a href="file:///D:/二轮考核/C.A.T/html/music.html?id=${id}" target="_blank">
+                        <a href="./music.html?id=${id}" target="_blank">
                             <span>${author}</span> -
                             <span>${songName}</span>
                         </a>
@@ -1433,7 +1444,7 @@ let hotMv = (function () {
                 let author2 = data[((data.length / 2)) + i].artistName;
                 str += `
                 <div class='wrap-img'>
-                    <a href="D:/二轮考核/C.A.T/html/mv.html?id=${id}" target='_blank'>
+                    <a href="./mv.html?id=${id}" target='_blank'>
                         <img src="${imgUrl}"
                         alt="">
                         <div class='desc'>
@@ -1441,7 +1452,7 @@ let hotMv = (function () {
                             <p>${author}</p>
                         </div>
                     </a>
-                    <a href="D:/二轮考核/C.A.T/html/mv.html?id=${id2}" target='_blank'>
+                    <a href="./mv.html?id=${id2}" target='_blank'>
                         <img src="${imgUrl2}" alt="">
                         <div class='desc'>
                             <p>${songName2}</p>
@@ -1721,7 +1732,7 @@ let mvRotate = (function () {
                                 <a href="#">${songName}</a>
                             </p>
                             <p><a href="#">${author}</a></p>
-                            <a href='file:///D:/二轮考核/C.A.T/html/music.html?id=${id}' class='play' target='_blank'></a>
+                            <a href='./music.html?id=${id}' class='play' target='_blank'></a>
                         </div>
                     </div>
                 </li>
@@ -1787,7 +1798,7 @@ let mvRotate = (function () {
                                 <a href="#">${songName}</a>
                             </p>
                             <p><a href="#">${author}</a></p>
-                            <a href='file:///D:/二轮考核/C.A.T/html/music.html?id=${id}' class='play' target='_blank'></a>
+                            <a href='./music.html?id=${id}' class='play' target='_blank'></a>
                         </div>
                     </div>
                 </li>
@@ -1885,7 +1896,7 @@ let showSinger = (function () {
                 let id = data[i].id
                 str += `
                 <li class="box">
-                    <a href='file:///D:/二轮考核/C.A.T/html/music.html?sid=${id}' target= "_blank">
+                    <a href='./music.html?sid=${id}' target= "_blank">
                         <div class='img'>
                             <img src="${picUrl}" alt="">
                         </div>
@@ -1996,130 +2007,6 @@ let navSwitch = (function () {
     }
 }())
 
-/**
- * canvas雨滴
- */
-
-let rainMove = (function () {
-    return function () {
-        let oCanvas = document.getElementsByTagName('canvas')[0];
-
-        let ctx = oCanvas.getContext('2d');
-
-        // 设置canvas的宽高 
-        let h = document.documentElement.clientHeight;
-        let w = document.documentElement.clientWidth
-        oCanvas.height = h;
-        oCanvas.width = w;
-
-        function Rain() {}
-
-        Rain.prototype = {
-            init() {
-                //设置坐标
-                this.x = getRandomNum(0, w);
-                this.y = 0;
-                // y方向的速度值
-                this.vy = getRandomNum(4, 5);
-                // 雨滴下落的最大高度
-                this.maxH = getRandomNum(0.8 * h, 0.9 * h)
-                // 圆的半径
-                this.r = 1; //半径
-                this.vr = 1 //增加的速度
-                // 判断透明度
-                this.opacity = 1;
-                this.vOpacity = 0.96;
-            },
-            draw() {
-                if (this.y >= this.maxH) { //雨点下落到指定位置,绘制圆形
-                    // 改变画笔的位置
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
-                    ctx.strokeStyle = `rgba(0, 255, 255, ${this.opacity})`;
-                    ctx.stroke();
-                } else { //没有到达指定位置，绘制雨滴
-                    ctx.fillStyle = `rgba(0, 255, 255)`;
-                    ctx.fillRect(this.x, this.y, 2, 10);
-                }
-                this.update();
-            },
-            update() { //更新坐标位置
-                if (this.y < this.maxH) { //没有到达终点
-                    this.y += this.vy;
-                } else { //开始绘制圆
-                    if (this.opacity > 0.03) { //透明度
-                        this.r += this.vr;
-                        if (this.r > 50) {
-                            // 再让透明度变化
-                            this.opacity *= this.vOpacity
-                        }
-                    } else {
-                        this.init()
-                    }
-                }
-            }
-        }
-
-        /**
-         * 得到随机数
-         * @param {*} min 最小值
-         * @param {*} max 最大值
-         */
-        function getRandomNum(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
-
-        //保存雨滴对象
-        let rains = [];
-
-        for (let i = 0; i < 30; i++) {
-            setTimeout(function () {
-                let rain = new Rain();
-                rains.push(rain);
-            }, i * 200)
-        }
-
-        rains.forEach(function (rain) {
-            rain.init();
-            rain.draw();
-        })
-
-        /**
-         * 运动
-         */
-        function startMove() {
-            //形成阴影的效果
-            ctx.fillStyle = `rgba(58, 97, 104, 0.1)`
-            ctx.fillRect(0, 0, w, h)
-            rains.forEach(function (rain) {
-                rain.draw();
-            })
-            requestAnimationFrame(startMove)
-        }
-
-        startMove();
-
-        //监听窗口宽高
-        window.onresize = function () {
-            oCanvas.height = h;
-            oCanvas.width = w;
-            //保存雨滴对象
-            let rains = [];
-            for (let i = 0; i < 30; i++) {
-                setTimeout(function () {
-                    let rain = new Rain();
-                    rains.push(rain);
-                }, i * 200)
-            }
-
-            rains.forEach(function (rain) {
-                rain.init();
-                rain.draw();
-            })
-            startMove();
-        }
-    }
-}())
 
 /**
  * 启动所有函数的初始化函数
@@ -2134,7 +2021,7 @@ function init() {
     search();
     login();
     navSwitch();
-    rainMove();
+    // rainMove();
 }
 
 init();
