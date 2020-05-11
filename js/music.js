@@ -136,8 +136,6 @@
                  setName(musicConfig.songNames[musicConfig.oIndex], musicConfig.authors[musicConfig.oIndex])
              }
              let index = 0,
-                 times = 0,
-                 everyTime = 1,
                  volumeMove = o$('.volume-move'),
                  volumeMode = o$('.volume-mode'),
                  volume = o$('.volume'),
@@ -183,8 +181,6 @@
                      if (musicConfig.lyrics.length > 0) {
                          // 处理歌词
                          initLyrics(musicConfig.lyrics[index])
-                         o$('.wrapper-lyrics').scrollTop = 0;
-                         everyTime = 1;
                      }
                      //改变背景
                      changeBg(index);
@@ -208,8 +204,6 @@
                  if (musicConfig.lyrics.length > 0) {
                      // 处理歌词
                      initLyrics(musicConfig.lyrics[musicConfig.oIndex])
-                     o$('.wrapper-lyrics').scrollTop = 0;
-                     everyTime = 1;
                  }
                  changeBg(musicConfig.oIndex);
              }
@@ -229,8 +223,6 @@
                  if (musicConfig.lyrics.length > 0) {
                      // 处理歌词
                      initLyrics(musicConfig.lyrics[musicConfig.oIndex])
-                     o$('.wrapper-lyrics').scrollTop = 0;
-                     everyTime = 1;
                  }
                  changeBg(musicConfig.oIndex);
 
@@ -326,8 +318,11 @@
              function Prograss(options) {
                  options.headMove.onmousedown = function (e) {
                      e.stopPropagation();
-                     musicConfig.oAudio.ontimeupdate = null;
-                     musicConfig.oAudio.pause();
+                     if (options.changeMode === 'currentTime') {
+                         console.log(1231);
+                        musicConfig.oAudio.ontimeupdate = null;
+                         musicConfig.oAudio.pause();
+                     }
                      document.onmousemove = function (e) {
                          let temp = e.clientX - options.headMove.offsetParent.offsetLeft;
                          if (temp < 0) {
