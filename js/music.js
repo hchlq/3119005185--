@@ -319,7 +319,6 @@
                  options.headMove.onmousedown = function (e) {
                      e.stopPropagation();
                      if (options.changeMode === 'currentTime') {
-                         musicConfig.oAudio.ontimeupdate = null;
                          musicConfig.oAudio.pause();
                      }
                      document.onmousemove = function (e) {
