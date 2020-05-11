@@ -319,8 +319,7 @@
                  options.headMove.onmousedown = function (e) {
                      e.stopPropagation();
                      if (options.changeMode === 'currentTime') {
-                         console.log(1231);
-                        musicConfig.oAudio.ontimeupdate = null;
+                         musicConfig.oAudio.ontimeupdate = null;
                          musicConfig.oAudio.pause();
                      }
                      document.onmousemove = function (e) {
@@ -328,7 +327,7 @@
                          if (temp < 0) {
                              temp = 0;
                          }
-                        //  总的进度条
+                         //  总的进度条
                          if (temp > options.prograssWidth) {
                              temp = options.prograssWidth;
                          }
@@ -338,7 +337,8 @@
                          options.prograssingWidth.style.width = temp + 'px';
                          if (options.changeMode === 'currentTime') {
                              musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth) * musicConfig.oAudio.duration;
-
+                            //  滚动时歌词改变
+                             setTime();
                          } else { //改变的是声音
                              musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth);
                              if (musicConfig.oAudio[options.changeMode] === 0) {
@@ -349,27 +349,29 @@
                          }
                          document.onmouseup = function () {
                              if (options.changeMode === 'currentTime') {
-                                musicConfig.oAudio.play();
+                                 if (musicConfig.playState === true) {
+                                     play()
+                                 }
                                  musicConfig.oAudio.ontimeupdate = function () {
                                      setTime();
                                      prograssMove()
                                      // 更新当前的时间
-                                      let timeDisplay;
-                                      //用秒数来显示当前播放进度
-                                      timeDisplay = Math.floor(musicConfig.oAudio.currentTime); //获取实时时间
-                                      //处理时间
-                                      let minute = timeDisplay / 60;
-                                      let minutes = parseInt(minute);
-                                      if (minutes < 10) {
-                                          minutes = "0" + minutes;
-                                      }
-                                      //秒
-                                      let second = timeDisplay % 60;
-                                      let seconds = Math.round(second);
-                                      if (seconds < 10) {
-                                          seconds = "0" + seconds;
-                                      }
-                                      musicConfig.curDom.innerText = minutes + ':' + seconds
+                                     let timeDisplay;
+                                     //用秒数来显示当前播放进度
+                                     timeDisplay = Math.floor(musicConfig.oAudio.currentTime); //获取实时时间
+                                     //处理时间
+                                     let minute = timeDisplay / 60;
+                                     let minutes = parseInt(minute);
+                                     if (minutes < 10) {
+                                         minutes = "0" + minutes;
+                                     }
+                                     //秒
+                                     let second = timeDisplay % 60;
+                                     let seconds = Math.round(second);
+                                     if (seconds < 10) {
+                                         seconds = "0" + seconds;
+                                     }
+                                     musicConfig.curDom.innerText = minutes + ':' + seconds
                                  }
                              }
                              document.onmousemove = null;
@@ -377,27 +379,27 @@
                      }
                  }
                  options.prograss.onmousedown = function (e) {
-                    if (e.button !== 0) { //点击不是左键
-                        return;
-                    }
-                    e.stopPropagation();
-                    if (!musicConfig.playState) {
-                        play()
-                        musicConfig.playState = true;
-                    }
-                    options.headMove.style.left = e.offsetX + (-6) + 'px';
-                    options.prograssingWidth.style.width = e.offsetX + 'px';
-                    if (options.changeMode === 'currentTime') {//音乐进度条
-                        musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth) * musicConfig.oAudio.duration;
+                     if (e.button !== 0) { //点击不是左键
+                         return;
+                     }
+                     e.stopPropagation();
+                     if (!musicConfig.playState) {
+                         play()
+                         musicConfig.playState = true;
+                     }
+                     options.headMove.style.left = e.offsetX + (-6) + 'px';
+                     options.prograssingWidth.style.width = e.offsetX + 'px';
+                     if (options.changeMode === 'currentTime') { //音乐进度条
+                         musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth) * musicConfig.oAudio.duration;
 
-                    } else { //改变的是声音
-                        musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth);
-                        if (musicConfig.oAudio[options.changeMode] === 0) {
-                            volumeMode.style.backgroundPositionY = `-18rem`;
-                        } else {
-                            volumeMode.style.backgroundPositionY = `-14.4rem`
-                        }
-                    }
+                     } else { //改变的是声音
+                         musicConfig.oAudio[options.changeMode] = (parseInt(options.prograssingWidth.style.width) / options.prograssWidth);
+                         if (musicConfig.oAudio[options.changeMode] === 0) {
+                             volumeMode.style.backgroundPositionY = `-18rem`;
+                         } else {
+                             volumeMode.style.backgroundPositionY = `-14.4rem`
+                         }
+                     }
                  }
              }
              //音乐进度条
@@ -417,7 +419,7 @@
                  prograss: volume
              })
 
-           
+
 
              /**
               * 自动播放完毕后初始化元素
@@ -586,7 +588,7 @@
                      /**
                       * 算出时间
                       */
-                      setTime = function () {
+                     setTime = function () {
                          let time = musicConfig.oAudio.currentTime - 0.6;
                          for (let i = 0; i < lyrArr.length; i++) {
                              if (time < lyrArr[i].time) {
@@ -598,9 +600,9 @@
 
                  }
                  musicConfig.oAudio.ontimeupdate = function () {
-                    setTime();
-                    prograssMove()
-                    // 更新当前的时间
+                     setTime();
+                     prograssMove()
+                     // 更新当前的时间
                      let timeDisplay;
                      //用秒数来显示当前播放进度
                      timeDisplay = Math.floor(musicConfig.oAudio.currentTime); //获取实时时间
@@ -617,7 +619,7 @@
                          seconds = "0" + seconds;
                      }
                      musicConfig.curDom.innerText = minutes + ':' + seconds
-                }
+                 }
              }
 
              /**
